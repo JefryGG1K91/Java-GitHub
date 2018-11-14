@@ -1,1 +1,2 @@
 Hello word!
+Web edition has been made!
