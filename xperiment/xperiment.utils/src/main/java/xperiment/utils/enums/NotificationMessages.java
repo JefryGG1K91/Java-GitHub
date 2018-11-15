@@ -11,7 +11,9 @@ public enum NotificationMessages {
 	SAVE_DEPARTMENT("Save Department"),
 	SAVE_DEPARTMENT_MESSAGE("Department saved succesfully"), 
 	ERROR_SAVE_DEPARTMENT("Error Saving Department"),
-	ERROR_SAVE_DEPARTMENT_MESSAGE("Department Has not been saved")
+	ERROR_SAVE_DEPARTMENT_MESSAGE("Department Has not been saved"), 
+	EMPLOYEE_SAVE_INVALID_TITLE("Error"),
+	EMPLOYEE_SAVE_INVALID_DESCRIPTION("at least you must insert a Department")
 	;
 	
 	

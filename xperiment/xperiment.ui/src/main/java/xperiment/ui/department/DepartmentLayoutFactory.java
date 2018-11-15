@@ -1,12 +1,10 @@
 package xperiment.ui.department;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import xperiment.ui.main.XperimentMainUI;

@@ -35,7 +35,7 @@ public class ShowAllDepartmentLayoutFactory implements UiComponentBuilder{
 			setMargin(true);
 			container = new BeanItemContainer<Deparment>(Deparment.class, list);
 			departmentTable = new Grid(container);
-			departmentTable.setColumnOrder("name","departmentName","departmentLocation");
+			departmentTable.setColumnOrder("departmentName","departmentLocation");
 			departmentTable.removeColumn("id");
 			departmentTable.setImmediate(true);
 			
