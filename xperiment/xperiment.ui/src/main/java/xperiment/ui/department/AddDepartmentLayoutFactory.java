@@ -42,8 +42,8 @@ public class AddDepartmentLayoutFactory {
 			beanField = new BeanFieldGroup<Deparment>(Deparment.class);
 			this.department= new Deparment();
 			
-			departmentName = new TextField();
-			departmentLocation = new TextField();
+			departmentName = new TextField(StringsUtils.DEPARTMENT_NAME.getString());
+			departmentLocation = new TextField(StringsUtils.DEPARTMENT_LOCATION.getString());
 			
 			departmentName.setNullRepresentation("");
 			departmentLocation.setNullRepresentation("");
@@ -70,14 +70,15 @@ public class AddDepartmentLayoutFactory {
 			
 			setMargin(true);
 			
-			GridLayout layout = new GridLayout(2, 3);
+			GridLayout layout = new GridLayout(1, 3);
 			layout.setSizeUndefined();
 			layout.setSpacing(true);
 
 			layout.addComponent(departmentName, 0, 0);
-			layout.addComponent(departmentLocation, 1, 0);
+			layout.addComponent(departmentLocation, 0, 1);
 
-			layout.addComponent(new HorizontalLayout(saveButton, clearButton), 0, 3);
+			layout.addComponent(new HorizontalLayout(saveButton, clearButton), 0, 2);
+			
 
 			return layout;
 		}
