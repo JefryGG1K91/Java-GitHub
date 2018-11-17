@@ -14,7 +14,7 @@ public class Deparment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name="department_id")
 	private Integer Id;
 	
 	@NotNull(message = "Name cannot be null")
@@ -48,10 +48,9 @@ public class Deparment {
 	public void setDepartmentLocation(String departmentLocation) {
 		this.departmentLocation = departmentLocation;
 	}
-
-
 	
-	
-	
-	
+	@Override
+	public String toString() {
+		return this.departmentName;
+	}
 }

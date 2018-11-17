@@ -31,20 +31,20 @@ public class AddEmployeeLayoutFactory {
 		private Button clearButton;
 		private TextField name;
 		private TextField lastname;
-		private TextField birthday;
+		private TextField birthDay;
 		private ComboBox department;
 		private BeanFieldGroup<Employee> beanField;
 		private Employee employee;
 		private SaveEmployeeListener employeeListener;
 
-
 		public AddEmployeeLayout(SaveEmployeeListener employeeSavedListener) {
 			this.employeeListener = employeeSavedListener;
+			this.employee = new Employee();
 		}
 
 		public AddEmployeeLayout load() {
 
-			List<Deparment> departmentList = departmentService.getAllNameDepartment();
+			List<Deparment> departmentList = departmentService.getAllDepartment();
 			department.addItems(departmentList);
 			return this;
 		}
@@ -52,16 +52,15 @@ public class AddEmployeeLayoutFactory {
 		public AddEmployeeLayout init() {
 
 			beanField = new BeanFieldGroup<Employee>(Employee.class);
-			this.employee = new Employee();
 
 			name = new TextField(StringsUtils.NAME.getString());
 			lastname =  new TextField(StringsUtils.LASTNAME.getString());
-			birthday =  new TextField(StringsUtils.BIRTHDAY.getString());
+			birthDay =  new TextField(StringsUtils.BIRTHDAY.getString());
 			department = new ComboBox(StringsUtils.DEPARTMENT.getString());
 
 			name.setNullRepresentation("");
 			lastname.setNullRepresentation("");
-			birthday.setNullRepresentation("");
+			birthDay.setNullRepresentation("");
 
 			saveButton = new Button(StringsUtils.SAVE.getString());
 			clearButton = new Button(StringsUtils.CLEAR.getString());
@@ -92,14 +91,12 @@ public class AddEmployeeLayoutFactory {
 			layout.setSpacing(true);
 
 			layout.addComponent(name, 0, 0);
-			layout.addComponent(birthday, 0, 1);
+			layout.addComponent(birthDay, 0, 1);
 
 			layout.addComponent(lastname, 1, 0);
 			layout.addComponent(department, 1, 1);
 
 			layout.addComponent(new HorizontalLayout(saveButton, clearButton), 0, 3);
-
-			birthday.clear();
 
 			return layout;
 
@@ -109,7 +106,7 @@ public class AddEmployeeLayoutFactory {
 
 			name.setValue(null);
 			lastname.setValue(null);
-			birthday.setValue(null);
+			birthDay.setValue(null);
 			department.setValue(null);
 
 		}
@@ -122,27 +119,33 @@ public class AddEmployeeLayoutFactory {
 						NotificationMessages.EMPLOYEE_SAVE_INVALID_DESCRIPTION.getString(), Type.ERROR_MESSAGE);			
 
 				return;
-			}
-
-			try {
-				beanField.commit();
-				Notification.show(NotificationMessages.SAVE_EMPLOYEE.getString(),
-						NotificationMessages.SAVE_EMPLOYEE_MESSAGE.getString(),Type.ASSISTIVE_NOTIFICATION);
-			} catch (CommitException e) {
-				Notification.show(NotificationMessages.ERROR_SAVE_EMPLOYEE.getString(),
-						NotificationMessages.ERROR_SAVE_EMPLOYEE_MESSAGE.getString(),Type.ERROR_MESSAGE);
-				return;
-			}finally {
-				employeeService.save(employee);
-				employeeListener.EmployeeSave();
-				clearFields();
-				Notification.show(NotificationMessages.SAVE_EMPLOYEE.getString(),
-						NotificationMessages.SAVE_EMPLOYEE_MESSAGE.getString(),Type.ASSISTIVE_NOTIFICATION);
-
+			}else {
+				
+				savedEmployee();
+				
 			}
 
 		}
 		
+		private void savedEmployee() {
+			try {
+				
+				beanField.commit();
+				
+			} catch (CommitException e) {
+				Notification.show(NotificationMessages.ERROR_SAVE_EMPLOYEE.getString(),
+						NotificationMessages.ERROR_SAVE_EMPLOYEE_MESSAGE.getString(),Type.ERROR_MESSAGE);
+				return;
+			}
+				employeeService.save(employee);
+				employeeListener.EmployeeSave();
+				Notification.show(NotificationMessages.SAVE_EMPLOYEE.getString(),
+						NotificationMessages.SAVE_EMPLOYEE_MESSAGE.getString(),Type.ASSISTIVE_NOTIFICATION);
+
+				clearFields();
+			
+		}
+
 		private boolean isSaveOperationValid() {
 			return departmentService.getAllNameDepartment().size() != 0;
 		}

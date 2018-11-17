@@ -18,7 +18,7 @@ public class AddEmployeeServiceImplementation implements AddEmployeeService {
 		employeInstance.setName(employeeDAO.getName());
 		employeInstance.setLastname(employeeDAO.getLastname());
 		employeInstance.setBirthDay(employeeDAO.getBirthDay());
-		
+		employeInstance.setDepartment(employeeDAO.getDepartment());
 		repository.save(employeInstance);
 		
 	}
