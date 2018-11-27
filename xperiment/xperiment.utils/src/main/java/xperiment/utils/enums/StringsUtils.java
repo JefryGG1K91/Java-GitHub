@@ -18,7 +18,8 @@ public enum StringsUtils {
 	DEPARTMENT("Department"),
 	ADD_DEPARTMENT("Add Department"), 
 	DEPARTMENT_NAME("Department Name"), 
-	DEPARTMENT_LOCATION("Department Location")
+	DEPARTMENT_LOCATION("Department Location"), 
+	STATISTICS_DEPARTMENT("Show Statistics")
 	;
 	
 	private final String string;

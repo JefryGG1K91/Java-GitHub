@@ -35,7 +35,7 @@ public class Employee {
 	@Column(name="employee_birthday")
 	private String birthDay;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "department_id")
 	@NotNull(message="Department must be filled!")
 	private Deparment department;

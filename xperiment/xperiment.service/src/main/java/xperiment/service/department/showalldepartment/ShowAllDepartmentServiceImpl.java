@@ -18,12 +18,5 @@ public class ShowAllDepartmentServiceImpl implements ShowAllDepartmentService {
 		return departmentRepository.getAllDepartment();
 	}
 
-	@Override
-	public List<Deparment> getAllNameDepartment() {
-		return departmentRepository.getAllNameDepartment();
-	}
-
-	
-	
-	
+		
 }

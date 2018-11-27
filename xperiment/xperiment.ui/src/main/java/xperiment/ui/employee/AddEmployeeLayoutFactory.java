@@ -147,7 +147,7 @@ public class AddEmployeeLayoutFactory {
 		}
 
 		private boolean isSaveOperationValid() {
-			return departmentService.getAllNameDepartment().size() != 0;
+			return departmentService.getAllDepartment().size() != 0;
 		}
 
 		@Override
