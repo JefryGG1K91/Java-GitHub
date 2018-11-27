@@ -21,7 +21,8 @@ public class DepartmentLayoutFactory   extends VerticalLayout implements View, S
 	private AddDepartmentLayoutFactory addDepartmentLayoutFactory;
 	@Autowired
 	private ShowAllDepartmentLayoutFactory showAllDepartmentLayoutFactory;
-
+	@Autowired
+	private StatisticsDeparmentLayoutFactory statisticsDeparmentLayoutFactory;
 
 	private void addLayout() {
 
@@ -33,9 +34,12 @@ public class DepartmentLayoutFactory   extends VerticalLayout implements View, S
 
 		Component sheetMainMenu=addDepartmentLayoutFactory.createComponent(this);
 		Component sheetShowAllDepartments=showAllDepartmentLayoutFactory.createComponent();
-	
+		Component statistics = statisticsDeparmentLayoutFactory.createComponent();
+		
+		
 		tabSheet.addTab(sheetMainMenu, StringsUtils.MAIN_MENU_DEPARTMENT.getString());
 		tabSheet.addTab(sheetShowAllDepartments, StringsUtils.LIST_DEPARTMENT.getString());
+		tabSheet.addTab(statistics, StringsUtils.STATISTICS_DEPARTMENT.getString());
 
 		addComponent(tabSheet);
 	}

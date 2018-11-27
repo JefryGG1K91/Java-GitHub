@@ -16,7 +16,10 @@ public enum StringsUtils {
 	MAIN_MENU_DEPARTMENT("Department Menu"),
 	LIST_DEPARTMENT("Department View"), 
 	DEPARTMENT("Department"),
-	ADD_DEPARTMENT("Add Department")
+	ADD_DEPARTMENT("Add Department"), 
+	DEPARTMENT_NAME("Department Name"), 
+	DEPARTMENT_LOCATION("Department Location"), 
+	STATISTICS_DEPARTMENT("Show Statistics")
 	;
 	
 	private final String string;

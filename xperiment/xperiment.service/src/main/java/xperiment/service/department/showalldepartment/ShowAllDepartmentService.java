@@ -7,6 +7,4 @@ public interface ShowAllDepartmentService {
 	
 	public List<Deparment> getAllDepartment();
 
-	public List<Deparment> getAllNameDepartment();
-	
 }
