@@ -8,14 +8,14 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
-import xperiment.model.employee.*;
+import xperiment.model.Employee;
 import xperiment.service.employee.showallemployee.ShowAllEmployeeService;
 import xperiment.ui.builder.UiComponentBuilder;
 
 @org.springframework.stereotype.Component
 public class ShowAllEmployeeLayoutFactory implements UiComponentBuilder {
 
-	private List<xperiment.model.employee.Employee> list;
+	private List<xperiment.model.Employee> list;
 	private BeanItemContainer<Employee> container;
 	
 	private class ShowAllEmployeeLayout extends VerticalLayout{

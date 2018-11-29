@@ -19,7 +19,7 @@ import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 
-import xperiment.model.employee.Employee;
+import xperiment.model.Employee;
 import xperiment.service.employee.showallemployee.ShowAllEmployeeService;
 import xperiment.services.employee.removedemployee.RemovedEmployeeServices;
 import xperiment.ui.main.XperimentMainUI;

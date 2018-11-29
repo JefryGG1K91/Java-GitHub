@@ -7,7 +7,8 @@ import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification.Type;
-import xperiment.model.department.Deparment;
+
+import xperiment.model.Deparment;
 import xperiment.service.department.adddepartment.AddDepartmentService;
 import xperiment.utils.enums.NotificationMessages;
 import xperiment.utils.enums.StringsUtils;

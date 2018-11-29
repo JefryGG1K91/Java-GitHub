@@ -1,7 +1,8 @@
 package xperiment.service.employee.showallemployee;
 
 import java.util.List;
-import xperiment.model.employee.Employee;
+
+import xperiment.model.Employee;
 
 public interface ShowAllEmployeeService {
 	

@@ -9,7 +9,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
 
-import xperiment.model.department.Deparment;
+import xperiment.model.Deparment;
 import xperiment.service.department.showalldepartment.ShowAllDepartmentService;
 import xperiment.ui.builder.UiComponentBuilder;
 

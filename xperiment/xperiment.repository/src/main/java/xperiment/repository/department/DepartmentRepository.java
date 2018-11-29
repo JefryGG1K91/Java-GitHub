@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import xperiment.model.department.Deparment;
+import xperiment.model.Deparment;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Deparment, Integer> {

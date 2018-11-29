@@ -1,6 +1,6 @@
 package xperiment.service.employee.addemployee;
 
-import xperiment.model.employee.Employee;
+import xperiment.model.Employee;
 
 public interface AddEmployeeService {
 

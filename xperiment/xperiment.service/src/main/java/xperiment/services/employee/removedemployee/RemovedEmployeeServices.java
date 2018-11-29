@@ -1,6 +1,6 @@
 package xperiment.services.employee.removedemployee;
 
-import xperiment.model.employee.Employee;
+import xperiment.model.Employee;
 
 public interface RemovedEmployeeServices {
 	

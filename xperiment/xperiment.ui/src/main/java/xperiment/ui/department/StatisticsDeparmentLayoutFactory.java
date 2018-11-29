@@ -9,7 +9,7 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-import xperiment.model.department.Deparment;
+import xperiment.model.Deparment;
 import xperiment.service.department.departmentstatistics.DepartmentStatisticsServ;
 import xperiment.service.department.showalldepartment.ShowAllDepartmentService;
 import xperiment.ui.builder.UiComponentBuilder;
