@@ -14,8 +14,9 @@ import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import xperiment.model.department.Deparment;
-import xperiment.model.employee.Employee;
+
+import xperiment.model.Deparment;
+import xperiment.model.Employee;
 import xperiment.service.department.showalldepartment.ShowAllDepartmentService;
 import xperiment.service.employee.addemployee.AddEmployeeService;
 import xperiment.utils.enums.NotificationMessages;

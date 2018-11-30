@@ -1,4 +1,4 @@
-package xperiment.model.employee;
+package xperiment.model;
 
 
 import javax.persistence.Column;
@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import xperiment.model.department.Deparment;
 
 @Entity
 @Table(name="employee")

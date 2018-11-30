@@ -1,6 +1,6 @@
 package xperiment.service.department.adddepartment;
 
-import xperiment.model.department.Deparment;
+import xperiment.model.Deparment;
 
 public interface AddDepartmentService {
 

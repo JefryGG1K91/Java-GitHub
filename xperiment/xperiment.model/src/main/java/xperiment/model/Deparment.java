@@ -1,4 +1,4 @@
-package xperiment.model.department;
+package xperiment.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
