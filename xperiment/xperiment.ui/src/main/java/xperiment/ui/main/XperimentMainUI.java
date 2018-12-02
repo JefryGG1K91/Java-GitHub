@@ -21,7 +21,7 @@ import xperiment.ui.employee.EmployeeLayoutFactory;
 import xperiment.ui.navigator.XperimentNavigator;
 
 @SpringUI(path=XperimentMainUI.NAME)
-@Title(value="X p e r i m e n t")
+
 @Theme("valo")
 public class XperimentMainUI extends UI{
 

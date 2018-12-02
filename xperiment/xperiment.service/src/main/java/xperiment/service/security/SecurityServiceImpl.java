@@ -20,7 +20,7 @@ public class SecurityServiceImpl implements UserDetailsService {
 
 		User user = userRepository.findByName(username);
 		
-		return new CustomUserDetails(user.getUsername(), user.getPassword(), user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(), user.getAuthorities());
+		return new CustomUserDetails(user.getUsername(), user.getPassword(), true, true, true, true, user.getAuthorities());
 	}
 
 	
