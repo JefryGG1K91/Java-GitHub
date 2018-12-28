@@ -39,7 +39,9 @@ public class InternetExplorer {
 			bmwRadio.click();
 			
 			Thread.sleep(5000);
+
 		
+			
 		} catch (InterruptedException e) {
 		
 			e.printStackTrace();

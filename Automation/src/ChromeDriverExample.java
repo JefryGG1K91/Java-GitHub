@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.support.ui.Select;
 
 public class ChromeDriverExample {
 	
@@ -34,10 +35,12 @@ public class ChromeDriverExample {
 			
 			 for (int i = 0; i < valueModelClass.size(); i++) {
 				
-				System.out.println(valueModelClass.get(i).getText()); 
+				System.out.println(valueModelClass.get(i).getText().trim()); 
 				 
 			}
 
+		
+			 
 		} catch (Exception e) {
 
 			e.printStackTrace();
