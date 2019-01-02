@@ -1,10 +1,14 @@
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InternetExplorer {
 	
@@ -33,14 +37,16 @@ public class InternetExplorer {
 			webDriver.manage().window().maximize();
 			webDriver.get(appURL);
 
-			webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			webDriver.findElement(By.xpath("//div/fieldset/label/input[@value='honda']")).click();
-			WebElement bmwRadio = webDriver.findElement(By.id("bmwradio"));
+			//way 1
+			WebDriverWait wait = new WebDriverWait(webDriver, 1000);
+			WebElement bmwRadio = wait.until(ExpectedConditions.elementToBeClickable(By.id("bmwradio")));
 			bmwRadio.click();
 			
-			Thread.sleep(5000);
-
-		
+			//way 2
+			webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			webDriver.findElement(By.xpath("//div/fieldset/label/input[@value='honda']")).click();
+			
+			Thread.sleep(1000);
 			
 		} catch (InterruptedException e) {
 		
