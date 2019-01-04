@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.google.common.io.Files;
 
-public class ScreenShoot {
-	private static WebDriver webDriver;
+public class HowTakeScreenShot {
 
+	private static WebDriver webDriver;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub  
 
@@ -35,7 +37,6 @@ public class ScreenShoot {
 		webDriver.manage().window().maximize();
 		webDriver.get(appURL);
 		
-		
 		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		String fileName = "123258" + ".png";
@@ -43,10 +44,11 @@ public class ScreenShoot {
 		
 		File sourceFile = ((TakesScreenshot)webDriver).getScreenshotAs(OutputType.FILE);
 		try {
-			Files.copy(sourceFile, new File(directory + fileName));
+			FileUtils.copyFile(sourceFile, new File(directory+fileName));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		webDriver.quit();
 
 	}
