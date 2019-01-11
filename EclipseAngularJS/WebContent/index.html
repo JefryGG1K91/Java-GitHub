@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<script src="angular.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+</head>
+
+ <body ng-controller="AppCtrl">
+	<p>{{employee.firstname}}</p>
+	<button ng-click="showMsg()">Click Me!</button>
+</body> 
+
+
+
+<script>
+		(function() {
+			var name = "myApp", requires = [], myApp = null;
+
+			myApp = angular.module(name, requires);
+
+			myApp.controller("AppCtrl", function($scope) {
+				$scope.employee = {
+					firstname : "Jefry",
+					lastname : "Gautam",
+					occupation : "Software Developer"
+				};
+
+				$scope.showMsg = function() {
+					console.log("Here is a message!");
+				}
+			});
+		}()); 
+	
+	
+</script>
+
+</html>

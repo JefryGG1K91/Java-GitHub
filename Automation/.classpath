@@ -10,5 +10,10 @@
 	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/selenium-java-3.141.59/client-combined-3.141.59.jar" sourcepath="C:/Users/jegutierrez/Downloads/DevelopStuff/selenium-java-3.141.59/client-combined-3.141.59-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/selenium-java-3.141.59/client-combined-3.141.59-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jegutierrez/Downloads/DevelopStuff/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-test-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
