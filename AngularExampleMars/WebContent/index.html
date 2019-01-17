@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="ISO-8859-1">
+
+<script type="text/javascript" src="angular.js"></script>
+<title>Insert title here</title>
+</head>
+<body ng-controller="Entity" ng-cloak>
+
+	<div ng-repeat="person in persons">
+
+		<input type="radio" value="{{person.name}}" ng-checked="$first"
+			ng-model="persons.example" name="radio_person">{{person.name}}
+
+	</div>
+
+	<div ng-switch="persons.example">
+		<div ng-switch-when="Jefry">Hola Jefry</div>
+		<div ng-switch-when="Peter">Hola Peter</div>
+		<div ng-switch-when="Jonh">Hola Jonh</div>
+		<div ng-switch-default>Hola " "</div>
+	</div>
+
+
+	<div>
+		<button ng-click="showPersonFomr()">Add new person</button>
+		<form ng-show="toggleNewPerson">
+			<input type="text" name="txt_name" ng-model="txt_name" />
+			<button ng-click="newPerson()">Submit</button>
+			<button ng-click="toggleNewPerson = false">Cancel</button>
+		</form>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	myApp = angular.module("myApp", []);
+
+	myApp.controller("Entity", function($scope) {
+
+		$scope.persons = [ {
+			name : "Jefry"
+		}, {
+			name : "Peter"
+		}, {
+			name : "Jonh"
+		} ];
+
+		$scope.toggleNewPerson = false;
+		
+		$scope.showPersonFomr= function(){
+			$scope.toggleNewPerson =true;
+		};
+		
+		$scope.newPerson = function(){
+			
+			persons.push();
+			
+		};
+	});
+</script>
+
+</html>
