@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="calcApp">
+<head>
+<script src="angular.js"></script>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+.content-loader tr td {
+	white-space: nowrap;
+}
+</style>
+
+<script >
+	calcApp = angular.module("calcApp", []);
+
+	calcApp.controller("ctrlApp", function($scope) {
+		
+		$scope.check= true;
+		$scope.textBox = "";
+		$scope.firstValue=0;
+		$scope.secondValue=0;
+		$scope.result=0;
+		$scope.operation="";
+		$scope.type="";
+		
+		$scope.clean = function(){
+			$scope.textBox = "";
+		};
+
+		$scope.append = function(clickedNumber){
+			$scope.textBox+=clickedNumber;
+		};
+		
+		$scope.action = function(actionToDo){
+			this.operation = actionToDo;
+			
+			switch(this.operation){
+			case"add":
+				$scope.type= "+";
+				break;
+			case"subs":
+				$scope.type= "-";
+				break;
+			case"mult":
+				$scope.type= "*";
+				break;
+			case"split":
+				$scope.type= "/";
+				break;
+			}
+				if($scope.textBox>="0"){
+					if($scope.firstValue==0){
+						$scope.firstValue = $scope.textBox;
+						$scope.clean();
+					}else if($scope.secondValue==0){
+						$scope.secondValue = $scope.textBox;
+						$scope.clean();
+					}
+				}else{
+					console.log("no value");
+				}
+				
+				if(this.operation =="result"){
+					switch(this.type){
+					case"+":
+						$scope.result= parseInt( $scope.firstValue, 0) + parseInt( $scope.secondValue, 0);
+						console.log("suma");
+						break;
+					case"-":
+						$scope.result= parseInt( $scope.firstValue, 0) - parseInt( $scope.secondValue, 0)
+						break;
+					case"*":
+						$scope.result= parseInt( $scope.firstValue, 0)  * parseInt( $scope.secondValue, 0)
+						break;
+					case"/":
+						$scope.result= parseInt( $scope.firstValue, 0)  / parseInt( $scope.secondValue, 0)
+						break;
+					}
+					$scope.textBox = $scope.result;
+					$scope.firstValue=0;
+					$scope.secondValue=0;
+				}
+		};
+	});
+</script>
+</head>
+<body>
+	<table ng-controller="ctrlApp" id="calc_table" border="3px">
+		<tr>
+			<td align="center" colspan="4"><input type="text" ng-model="textBox" id="calc" ng-disabled="{{check}}"/></td>
+		</tr>
+		<tr>
+			<td align="center"><input type="button" ng-click="append(1)" value="1"/></td>
+			<td align="center"><input type="button" ng-click="append(2)" value="2"/></td>
+			<td align="center"><input type="button" ng-click="append(3)" value="3"/></td>
+			<td align="center"><input type="button" ng-click="action('add')" value="+"/></td>
+		</tr>
+		<tr>
+			<td align="center"><input type="button" ng-click="append(4)" value="4"/></td>
+			<td align="center"><input type="button" ng-click="append(5)" value="5"/></td>
+			<td align="center"><input type="button" ng-click="append(6)" value="6"/></td>
+			<td align="center"><input type="button" ng-click="action('subs')" value="-"/></td>
+		</tr>
+		<tr>
+			<td align="center"><input type="button" ng-click="append(7)" value="7"/></td>
+			<td align="center"><input type="button" ng-click="append(8)" value="8"/></td>
+			<td align="center"><input type="button" ng-click="append(9)" value="9"/></td>
+			<td align="center"><input type="button" ng-click="action('mult')" value="x"/></td>
+		</tr>
+		<tr>
+			<td align="center"><input type="button" ng-click="append(0)" value="0"/></td>
+			<td align="center"><input type="button" ng-click="action('split')" value="/"/></td>
+			<td align="center"><input type="button" ng-click="clean()" value="C"/></td>
+			<td align="center"><input type="button" ng-click="action('result')" value="="/></td>
+		</tr>
+	</table>
+</body>
+</html>
