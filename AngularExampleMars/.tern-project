@@ -1,0 +1,40 @@
+{
+  "ecmaVersion": 5,
+  "plugins": {
+    "guess-types": {
+      
+    },
+    "outline": {
+      
+    },
+    "jscs": {
+      
+    },
+    "node": {
+      
+    },
+    "chrome-apps": {
+      
+    },
+    "es_modules": {
+      
+    },
+    "doc_comment": null,
+    "angular1": {
+      
+    },
+    "browser-extension": {
+      
+    },
+    "jquery-ui1-12": {
+      
+    },
+    "jquery-extension": {
+      
+    }
+  },
+  "libs": [
+    "browser",
+    "jquery"
+  ]
+}

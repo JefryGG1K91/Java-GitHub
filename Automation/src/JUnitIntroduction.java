@@ -1,27 +1,26 @@
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 class JUnitIntroduction {
 
-	@BeforeAll
+	@BeforeClass
 	static void setUpBeforeClass() throws Exception {
 		System.out.println("Executed before class.....");
 	}
 
-	@AfterAll
+	@After
 	static void tearDownAfterClass() throws Exception {
 		System.out.println("Executed after class.....");
 	}
 
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 		System.out.println("Executed before .....");
 	}
 
-	@AfterEach
+	@After
 	void tearDown() throws Exception {
 		System.out.println("Executed after.....");
 	}

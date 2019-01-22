@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myApp" >
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="angular.js"></script>
+<title>Filtering</title>
+<script>
+	myApp = angular.module("myApp", []);
+	
+	myApp.controller("CtrlFilt", function($scope){
+		
+		$scope.employees = [
+		                   {code:"123" , name:"John" , department:"HR"},
+		                   {code:"258", name:"Peter", department:"OP"},
+		                   {code:"598", name:"Albert", department:"AC"}
+		                   ];
+	});
+</script>
+</head>
+	<div ng-repeat="employee in employees">
+
+		<input type="radio" value="employee" ng-checked="$first"
+			 name="radio_person">{{person.name}}
+
+	</div>
+</html>

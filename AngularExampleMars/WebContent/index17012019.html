@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="angular.js"></script>
+<title>17012019</title>
+<script type="text/javascript">
+	var myApp = angular.module("myApp", []);
+
+	myApp.controller("formCtrl", function($scope, $timeout) {
+
+		$scope.dissable = true;
+		$scope.url = "";
+		
+		$timeout(function() {
+			$scope.url="http://google.com";
+			$scope.dissable = false;
+		}, 2000);
+
+	});
+</script>
+</head>
+<body ng-controller="formCtrl">
+		<input type="text" value="Inactive" ng-readonly="{{dissable}}" name="txtMe" />
+		<button ng-disabled="{{dissable}}" name="butonClick" >Click Me!</button>
+		<input type="checkbox" ng-checked="{{dissable}}" name="checkMe" ng-disabled="{{dissable}}"/>
+		<a ng-href="{{url}}">google.com</a>
+</body>
+</html>
