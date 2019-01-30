@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xperiment.bussines.implementation;
+package com.xperiment.persistence;
 
 import com.xperiment.entity.Employee;
 import com.xperiment.interfaces.EmployeeInterface;
