@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xperiment.interfaces;
+package com.xperiment.service;
 
 import com.xperiment.entity.Employee;
 import java.util.List;
+import javax.ejb.Remote;
 
 /**
  *
  * @author jgutierrez
  */
-public interface EmployeeInterface {
+@Remote
+public interface EmployeeInterfaceRemote {
     
     public void insertEmployee(Employee emp);
     public void updateEmployee(Employee emp);

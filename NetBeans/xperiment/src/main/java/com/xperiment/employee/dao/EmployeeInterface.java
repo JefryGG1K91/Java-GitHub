@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xperiment.interfaces;
+package com.xperiment.employee.dao;
 
 import com.xperiment.entity.Employee;
 import java.util.List;
-import javax.ejb.Local;
 
 /**
  *
  * @author jgutierrez
  */
-@Local
-public interface EmployeeInterfaceLocal {
-   
+public interface EmployeeInterface {
+    
     public void insertEmployee(Employee emp);
+    
     public void updateEmployee(Employee emp);
+    
     public void deleteEmployee(Employee emp);
+    
     public List<Employee> getAllEmployee();
     
 }

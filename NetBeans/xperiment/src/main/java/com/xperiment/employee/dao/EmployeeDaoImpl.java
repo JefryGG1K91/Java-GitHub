@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xperiment.persistence;
+package com.xperiment.employee.dao;
 
 import com.xperiment.entity.Employee;
-import com.xperiment.interfaces.EmployeeInterface;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,15 +16,14 @@ import javax.persistence.Persistence;
  *
  * @author jgutierrez
  */
-
 @Stateless
-public class EmployeePersistenUnit implements EmployeeInterface{
-
+public class EmployeeDaoImpl implements EmployeeInterface {
+    
     private static EntityManager em;
     private static EntityTransaction et;
     private static final String PERSISTEN_UNIT="com.xperiment";
     
-    public EmployeePersistenUnit(){
+    public EmployeeDaoImpl(){
         em = Persistence.createEntityManagerFactory(PERSISTEN_UNIT).createEntityManager();
         et = em.getTransaction();
     }
