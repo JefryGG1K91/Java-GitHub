@@ -7,4 +7,24 @@
                 <goal>compile</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-package</actionName>
+            <displayName>package</displayName>
+            <goals>
+                <goal>package</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>package</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-clean</actionName>
+            <displayName>clean</displayName>
+            <goals>
+                <goal>clean</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>clean</activatedProfile>
+            </activatedProfiles>
+        </action>
     </actions>

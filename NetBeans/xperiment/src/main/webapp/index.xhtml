@@ -33,8 +33,10 @@
     <h:body>
         <div>   
             <ul>
-                <li><a href="EmployeeView.xhtml">Employee</a></li>
-                <li><a href="">Department</a></li>
+                <h:form>
+                    <li><h:commandLink action="EmployeeView.xhtml" value="Employee"/>Employee</li>
+                    <li><a href="">Department</a></li>
+                </h:form>
             </ul>
         </div>
     </h:body>

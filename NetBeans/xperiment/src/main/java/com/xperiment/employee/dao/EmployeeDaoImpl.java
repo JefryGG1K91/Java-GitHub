@@ -36,7 +36,7 @@ public class EmployeeDaoImpl implements EmployeeInterface {
             em.persist(emp);
             et.commit();
         } catch (Exception e) {
-            System.out.println("com.xperiment.bussines.implementation.EmployeePersistenUnit.insertEmployee() "+e.getMessage());
+            System.out.println("com.xperiment.bussines.implementation.insertEmployee() "+e.getMessage());
         }
 
     }
