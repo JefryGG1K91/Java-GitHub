@@ -27,7 +27,8 @@ public class UserBean {
     private String firstName;
     private String lastName;
     private String userName;
-    private String password;
+    private String password1;
+    private String password2;
     private List<Users> users;
     
     @PostConstruct
@@ -93,12 +94,20 @@ public class UserBean {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword1() {
+        return password1;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword1(String password) {
+        this.password1 = password;
+    }
+    
+     public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password) {
+        this.password2 = password;
     }
     
 }
