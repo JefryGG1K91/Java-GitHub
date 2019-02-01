@@ -5,15 +5,12 @@
  */
 package Service.login;
 
-import javax.ejb.Local;
-
 /**
  *
  * @author jgutierrez
  */
-@Local
-public interface LoginServicesLocal {
-   
-    public void verifyLogin(String user, String pass);
+public interface LoginInterfaceDao {
+    
+    public boolean verifyLogin(String user, String pass);
     
 }

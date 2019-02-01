@@ -5,15 +5,15 @@
  */
 package Service.login;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 /**
  *
  * @author jgutierrez
  */
-@Remote
-public interface LoginServicesRemote {
+@Local
+public interface LoginInterfaceLocal {
     
-    public void verifyLogin(String user, String pass);
+    public boolean verifyLogin(String user, String pass);
     
 }
