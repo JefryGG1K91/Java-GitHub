@@ -1,0 +1,44 @@
+create database practicejgg;
+
+use practicejgg;
+
+
+
+create table users(
+
+user_id int primary key not null auto_increment,
+
+first_name varchar(50) not null,
+
+last_name varchar(50) not null,
+
+user_name varchar(50) not null,
+
+user_password varchar(50) not null
+);
+
+
+
+INSERT INTO `practicejgg`.`users`
+
+(
+`first_name`,
+
+`last_name`,
+
+`user_name`,
+
+`user_password`)
+
+VALUES
+(
+
+'Maria',
+'Perez',
+'mperez',
+'2345'
+);
+
+
+
+select * from users;
