@@ -9,8 +9,8 @@
         <title>Employee View</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:dataTable value="#{userBean.users}" var="us"  id="usr" selectionMode="single">
+        <h:form id="formToTable">
+            <p:dataTable value="#{userBean.users}" var="us" id="usr">
                 <p:column>
                     <f:facet name="header">Name</f:facet>
                         #{us.firstName}
@@ -29,33 +29,50 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">Options</f:facet>
-                    <h:commandButton value="Edit"></h:commandButton>
-                    <h:commandButton value="Delete"></h:commandButton>
+                    <p:commandButton value="Edit"></p:commandButton>
+                    <p:commandButton value="Delete"></p:commandButton>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Add" oncomplete="PF('userDialog').show();"  update="usr">
-                        <p:ajax event="dialogReturn" update="usr"/>
+                    <p:commandButton value="Add" oncomplete="PF('userDialog').show();" >
+                        <p:ajax event="dialogReturn" />
                     </p:commandButton>
                 </f:facet>
             </p:dataTable>
         </h:form>
 
         <h:form id="dialogoForm" prependId="false">
-            <p:dialog  header="Add User" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                <h:panelGrid columns="2"  columnClasses="label,value">
-                    <h:outputText value="Name"/>
-                    <h:inputText value="#{userBean.firstName}"/>
-                    <h:outputText value="Last Name"/>
-                    <h:inputText value="#{userBean.lastName}"/>
-                    <h:outputText value="UserName"/>
-                    <h:inputText value="#{userBean.firstName}"/>
+            <h:message for="addPanel" style="color:red;" />
+            <p:dialog  header="Add New User" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <h:panelGrid  id="addPanel">
+
+                    <f:event listener="#{userBean.validatePassword}" type="postValidate" />
+
+                    <p:outputLabel value="Name"/>
+                    <p:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="*Insert your name"/>
+                    <h:message for="firstname" style="color: red" />
+
+                    <p:outputLabel value="Last Name"/>
+                    <p:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="**Insert your last name"/>
+                    <p:message for="lastname" style="color: red" />
+
+                    <p:outputLabel value="UserName"/>
+                    <p:inputText id="username" value="#{userBean.userName}" required="true"/>
+                    <p:message for="username" style="color: red" />
+
                     <h:outputText value="Password"/>
-                    <h:inputText value="#{userBean.password1}" required="true"/>
-                    <h:outputText value="Confirm Password"/>
-                    <h:inputText value="#{userBean.password2}" required="true"/>
+                    <p:inputText id="passOne" value="#{userBean.password1}" required="true" requiredMessage="Mandatory"/>
+                    <p:message for="passOne" style="color: red" />
+
+                    <p:outputLabel value="Confirm Password"/>
+                    <p:inputText id="passTwo" value="#{userBean.password2}" required="true" requiredMessage="Mandatory"/>
+                    <p:message for="passTwo" style="color: red" />
+
                     <f:facet name="footer">
-                        <h:commandButton value="Add"  />
+                        <p:commandButton value="Add" actionListener="#{userBean.addNewUser()}" oncomplete="userDialog.hide();">
+                            <p:ajax event="dialogReturn" update=":formToTable:usr"/>
+                        </p:commandButton>
                     </f:facet>
+
                 </h:panelGrid>
             </p:dialog>
         </h:form>
