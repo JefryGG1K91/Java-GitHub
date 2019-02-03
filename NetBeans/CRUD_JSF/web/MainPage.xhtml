@@ -9,72 +9,70 @@
         <title>Employee View</title>
     </h:head>
     <h:body>
-        <h:form id="formToTable">
-            <p:dataTable value="#{userBean.users}" var="us" id="usr">
+        <h:form id="formTable" prependId="false">
+            <p:dataTable value="#{userBean.users}"
+                         var="us" 
+                         id="users"
+                         rowKey="#{us.userId}"
+                         selection="#{userBean.selectedUser}" 
+                         selectionMode="single"
+                         >
+                
+                <f:facet name="header">
+                    User's Table
+                </f:facet>
                 <p:column>
                     <f:facet name="header">Name</f:facet>
-                        #{us.firstName}
+                    <h:outputText value="#{us.firstName}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">Last Name</f:facet>
-                        #{us.lastName}
+                    <h:outputText value="#{us.lastName}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">User</f:facet>
-                        #{us.userName}
+                    <h:outputText value="#{us.userName}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">Password</f:facet>
-                        #{us.userPassword}
+                    <h:outputText value="#{us.userPassword}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">Options</f:facet>
-                    <p:commandButton value="Edit"></p:commandButton>
-                    <p:commandButton value="Delete"></p:commandButton>
+                    <p:commandButton id="editBtn" value="Edit" actionListener="#{userBean.loadUser()}"/>
+                    <p:commandButton value="Delete"  actionListener="#{userBean.deleteUser()}"/>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Add" oncomplete="PF('userDialog').show();" >
-                        <p:ajax event="dialogReturn" />
+                    <p:commandButton value="Add" oncomplete="PF('dial').show();">
+                         <p:ajax event="dialogReturn" update="users"/>
                     </p:commandButton>
                 </f:facet>
             </p:dataTable>
-        </h:form>
 
-        <h:form id="dialogoForm" prependId="false">
-            <h:message for="addPanel" style="color:red;" />
-            <p:dialog  header="Add New User" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                <h:panelGrid  id="addPanel">
+            <p:dialog modal="true" id="formDialog" widgetVar="dial" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="addOutPanel" style="text-align:center;">
+                    <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value">
+                       
+                                   <p:outputLabel value="Name"/>
+                        <p:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="*Insert your name"/>
 
-                    <f:event listener="#{userBean.validatePassword}" type="postValidate" />
+                        <p:outputLabel value="Last Name"/>
+                        <p:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="*Insert your last name"/>
 
-                    <p:outputLabel value="Name"/>
-                    <p:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="*Insert your name"/>
-                    <h:message for="firstname" style="color: red" />
+                        <p:outputLabel value="UserName"/>
+                        <p:inputText id="username" value="#{userBean.userName}" required="true" requiredMessage="*Insert your user name"/>
 
-                    <p:outputLabel value="Last Name"/>
-                    <p:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="**Insert your last name"/>
-                    <p:message for="lastname" style="color: red" />
+                        <p:outputLabel value="Password"/>
+                        <p:password id="passOne" value="#{userBean.password1}" required="true" requiredMessage="Mandatory"/>
 
-                    <p:outputLabel value="UserName"/>
-                    <p:inputText id="username" value="#{userBean.userName}" required="true"/>
-                    <p:message for="username" style="color: red" />
-
-                    <h:outputText value="Password"/>
-                    <p:inputText id="passOne" value="#{userBean.password1}" required="true" requiredMessage="Mandatory"/>
-                    <p:message for="passOne" style="color: red" />
-
-                    <p:outputLabel value="Confirm Password"/>
-                    <p:inputText id="passTwo" value="#{userBean.password2}" required="true" requiredMessage="Mandatory"/>
-                    <p:message for="passTwo" style="color: red" />
-
-                    <f:facet name="footer">
-                        <p:commandButton value="Add" actionListener="#{userBean.addNewUser()}" oncomplete="userDialog.hide();">
-                            <p:ajax event="dialogReturn" update=":formToTable:usr"/>
-                        </p:commandButton>
-                    </f:facet>
-
-                </h:panelGrid>
-            </p:dialog>
+                        <p:outputLabel value="Confirm Password"/>
+                        <p:password id="passTwo" value="#{userBean.password2}" required="true" requiredMessage="Mandatory"/>
+                        
+                        <p:commandButton oncomplete="PF('dial').hide();" value="Save"  actionListener="#{userBean.addNewUser()}" update="users"/>
+            
+                    </p:panelGrid>
+                </p:outputPanel>
+               </p:dialog>
         </h:form>
 
     </h:body>

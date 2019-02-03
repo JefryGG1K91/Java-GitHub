@@ -10,14 +10,8 @@ import Service.user.UserInterfaceLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 
 /**
  *
@@ -36,12 +30,14 @@ public class UserBean {
     private String password1;
     private String password2;
     private List<Users> users;
+    private Users selectedUser;
 
     @PostConstruct
     public void init() {
 
         this.users = userInterfaceLocal.getAllUsers();
-
+        this.selectedUser=new Users();
+        
     }
 
     public void addNewUser() {
@@ -59,48 +55,35 @@ public class UserBean {
         if (userInterfaceLocal.addUser(userTemp)) {
 
           clearValues();
-
         }
 
     }
 
     public void updateUser() {
-
+       
     }
 
     public void deleteUser() {
 
+         if (userInterfaceLocal.deleteUser(selectedUser.getUserId())) {
+            
+            this.selectedUser = new Users();
+            
+        }
+         
     }
 
-    public void validatePassword(ComponentSystemEvent event) {
-
-        FacesContext fc = FacesContext.getCurrentInstance();
-
-        UIComponent component = event.getComponent();
-
-        UIInput passOneInput = (UIInput) component.findComponent("passOne");
-        String passwordOne = passOneInput.getLocalValue() == null ? "" : passOneInput.getLocalValue().toString();
-        String passIdOne = passOneInput.getClientId();
-
-        UIInput uiInputConfirmPassword = (UIInput) component.findComponent("passTwo");
-        String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
-                : uiInputConfirmPassword.getLocalValue().toString();
-
-        if (passwordOne.isEmpty() || confirmPassword.isEmpty()) {
-            return;
-        }
-
-        if (!passwordOne.equals(confirmPassword)) {
-
-            FacesMessage msg = new FacesMessage("Password must match confirm password");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            fc.addMessage(passIdOne, msg);
-            fc.renderResponse();
-
-        }
-
+    public void loadUser(){
+    
+        this.id=getSelectedUser().getUserId();
+        this.firstName=getSelectedUser().getFirstName();
+        this.lastName=getSelectedUser().getLastName();
+        this.userName=getSelectedUser().getUserName();
+        this.password1=getSelectedUser().getUserPassword();
+        this.password2=getSelectedUser().getUserPassword();
+              
     }
-
+    
     public int getId() {
         return id;
     }
@@ -163,6 +146,20 @@ public class UserBean {
             userName = "";
             password1 = "";
             password2 = "";
+    }
+
+    /**
+     * @return the selectedUser
+     */
+    public Users getSelectedUser() {
+        return selectedUser;
+    }
+
+    /**
+     * @param selectedUser the selectedUser to set
+     */
+    public void setSelectedUser(Users selectedUser) {
+        this.selectedUser = selectedUser;
     }
 
 }

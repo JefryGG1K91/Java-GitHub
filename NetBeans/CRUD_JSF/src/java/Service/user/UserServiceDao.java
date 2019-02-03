@@ -8,18 +8,18 @@ package Service.user;
 import Model.Users;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 
 /**
  *
  * @author jgutierrez
  */
-@Stateful
+@Stateless
 public class UserServiceDao implements UserInterfaceDao {
 
-    @PersistenceContext(unitName = "CRUD_JSFPU", type = PersistenceContextType.EXTENDED)
+    @PersistenceContext(unitName = "CRUD_JSFPU")
     EntityManager em;
     
   //  private EntityTransaction et;

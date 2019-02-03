@@ -8,13 +8,13 @@ package Service.user;
 import Model.Users;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author jgutierrez
  */
-@Stateful
+@Stateless
 public class UserServiceIpImpl implements UserInterfaceLocal, UserInterfaceRemote {
 
     @EJB

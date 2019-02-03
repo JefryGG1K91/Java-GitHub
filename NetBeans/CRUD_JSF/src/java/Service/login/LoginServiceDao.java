@@ -9,7 +9,6 @@ import Model.Users;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -19,14 +18,12 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class LoginServiceDao implements LoginInterfaceDao {
 
-    @PersistenceContext(name= "CRUD_JSFPU")
-    private final EntityManager em;
-    private static final String PERSISTENCE_UNIT="CRUD_JSFPU";
+    @PersistenceContext(unitName = "CRUD_JSFPU")
+    EntityManager em;
+    //private static final String PERSISTENCE_UNIT="CRUD_JSFPU";
     
     public LoginServiceDao(){
-    
-        em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager();
-    
+    // em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager();
     }
     
     @Override
