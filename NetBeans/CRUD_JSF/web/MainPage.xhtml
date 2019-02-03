@@ -9,14 +9,14 @@
         <title>Employee View</title>
     </h:head>
     <h:body>
-        <h:form id="formTable" prependId="false">
+        <h:form id="formTable">
             <p:dataTable value="#{userBean.users}"
                          var="us" 
                          id="users"
                          rowKey="#{us.userId}"
                          selection="#{userBean.selectedUser}" 
                          selectionMode="single">
-                
+
                 <f:facet name="header">
                     User's Table
                 </f:facet>
@@ -38,12 +38,15 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">Options</f:facet>
-                    <p:commandButton id="editBtn" value="Edit" actionListener="#{userBean.loadUser(us)}"/>
+                    <p:commandButton   value="Edit" update=":formTable:formEditDialog" oncomplete="PF('dialEdit').show()">
+                        <f:setPropertyActionListener  value="#{us}" target="#{userBean.selectedUser}" />
+                    </p:commandButton>
+                    
                     <p:commandButton value="Delete"  action="#{userBean.deleteUser(us)}" process="@this" update="users"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton value="Add" oncomplete="PF('dial').show();">
-                         <p:ajax event="dialogReturn" update="users"/>
+                        <p:ajax event="dialogReturn" update="users"/>
                     </p:commandButton>
                 </f:facet>
             </p:dataTable>
@@ -51,7 +54,7 @@
             <p:dialog modal="true" id="formDialog" widgetVar="dial" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="addOutPanel" style="text-align:center;">
                     <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value">
-                       
+
                         <p:outputLabel value="Name"/>
                         <p:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="*Insert your name"/>
 
@@ -66,12 +69,36 @@
 
                         <p:outputLabel value="Confirm Password"/>
                         <p:password id="passTwo" value="#{userBean.password2}" required="true" requiredMessage="Mandatory"/>
-                        
+
                         <p:commandButton oncomplete="PF('dial').hide();" value="Save"  actionListener="#{userBean.addNewUser()}" update="users"/>
-            
+
                     </p:panelGrid>
                 </p:outputPanel>
-               </p:dialog>
+            </p:dialog>
+
+            <p:dialog modal="true" id="formEditDialog" widgetVar="dialEdit" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="addOutPanel" style="text-align:center;">
+                    <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value" rendered="#{not empty userBean.selectedUser}">
+
+                        <p:outputLabel value="Name"/>
+                        <p:inputText id="firstname" value="#{userBean.selectedUser.firstName}" required="true" requiredMessage="*Insert your name"/>
+
+                        <p:outputLabel value="Last Name"/>
+                        <p:inputText id="lastname" value="#{userBean.selectedUser.lastName}" required="true" requiredMessage="*Insert your last name"/>
+
+                        <p:outputLabel value="UserName"/>
+                        <p:inputText id="username" value="#{userBean.selectedUser.userName}" required="true" requiredMessage="*Insert your user name"/>
+
+                        <p:outputLabel value="Password"/>
+                        <p:password id="passOne" value="#{userBean.selectedUser.userPassword}" required="true" requiredMessage="Mandatory"/>
+
+                        <p:commandButton oncomplete="PF('dialEdit').hide();" value="Save"  actionListener="#{userBean.updateUser()}" update="users"/>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
         </h:form>
 
     </h:body>

@@ -33,12 +33,13 @@ public class UserBean {
     private String password2;
     private List<Users> users;
     private Users selectedUser;
-
+//<!--https://www.primefaces.org/showcase/ui/data/datatable/selection.xhtml-->
     @PostConstruct
     public void init() {
 
         this.users = userInterfaceLocal.getAllUsers();
         this.selectedUser=new Users();
+        this.firstName ="binding example";
         
     }
 
