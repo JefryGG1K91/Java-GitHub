@@ -82,6 +82,13 @@ public class Users implements Serializable {
         this.userName = userName;
         this.userPassword = userPassword;
     }
+    
+        public Users(String firstName, String lastName, String userName, String userPassword) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
 
     public Integer getUserId() {
         return userId;

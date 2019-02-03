@@ -10,8 +10,10 @@ import Service.user.UserInterfaceLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -56,31 +58,31 @@ public class UserBean {
 
           clearValues();
         }
-
     }
 
     public void updateUser() {
        
     }
 
-    public void deleteUser() {
+    public void deleteUser(Users us) {
 
-         if (userInterfaceLocal.deleteUser(selectedUser.getUserId())) {
+         if (userInterfaceLocal.deleteUser(us.getUserId())) {
             
-            this.selectedUser = new Users();
+          RequestContext.getCurrentInstance().showMessageInDialog(
+                  new FacesMessage(FacesMessage.SEVERITY_INFO, "User notification", "User has been deleted"));
             
         }
          
     }
 
-    public void loadUser(){
+    public void loadUser(Users us){
     
-        this.id=getSelectedUser().getUserId();
-        this.firstName=getSelectedUser().getFirstName();
-        this.lastName=getSelectedUser().getLastName();
-        this.userName=getSelectedUser().getUserName();
-        this.password1=getSelectedUser().getUserPassword();
-        this.password2=getSelectedUser().getUserPassword();
+        this.id=us.getUserId();
+        this.firstName=us.getFirstName();
+        this.lastName=us.getLastName();
+        this.userName=us.getUserName();
+        this.password1=us.getUserPassword();
+        this.password2=us.getUserPassword();
               
     }
     

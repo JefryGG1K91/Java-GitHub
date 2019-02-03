@@ -15,8 +15,7 @@
                          id="users"
                          rowKey="#{us.userId}"
                          selection="#{userBean.selectedUser}" 
-                         selectionMode="single"
-                         >
+                         selectionMode="single">
                 
                 <f:facet name="header">
                     User's Table
@@ -39,8 +38,8 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">Options</f:facet>
-                    <p:commandButton id="editBtn" value="Edit" actionListener="#{userBean.loadUser()}"/>
-                    <p:commandButton value="Delete"  actionListener="#{userBean.deleteUser()}"/>
+                    <p:commandButton id="editBtn" value="Edit" actionListener="#{userBean.loadUser(us)}"/>
+                    <p:commandButton value="Delete"  action="#{userBean.deleteUser(us)}" process="@this" update="users"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton value="Add" oncomplete="PF('dial').show();">
@@ -53,7 +52,7 @@
                 <p:outputPanel id="addOutPanel" style="text-align:center;">
                     <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value">
                        
-                                   <p:outputLabel value="Name"/>
+                        <p:outputLabel value="Name"/>
                         <p:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="*Insert your name"/>
 
                         <p:outputLabel value="Last Name"/>
