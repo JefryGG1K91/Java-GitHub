@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,12 +29,15 @@ public class LoginServiceDao implements LoginInterfaceDao {
     
     @Override
     public boolean verifyLogin(String user, String pass) {
-       
-        List<Users> result =em.createNamedQuery("Users.veryfyLogin",Users.class).setParameter(1, user).setParameter(2, pass).getResultList();
-         
-        for (int i = 0; i < result.size(); i++) {
+              
+        Query query = em.createNativeQuery("SELECT * FROM users where users.user_name=?1 and users.user_password=?2", Users.class);
+        query.setParameter(1, user);
+        query.setParameter(2, pass);
+        List<Users> result2 = (List<Users>)query.getResultList();
+        
+        for (int i = 0; i < result2.size(); i++) {
             
-            if (result.get(i).getUserName().equals(user) && result.get(i).getUserPassword().equals(pass)) {
+            if (result2.get(i).getUserName().equals(user) && result2.get(i).getUserPassword().equals(pass)) {
                  
                 return true;
                 

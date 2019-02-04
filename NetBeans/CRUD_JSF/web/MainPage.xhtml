@@ -3,104 +3,74 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      >
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Employee View</title>
     </h:head>
     <h:body>
         <h:form id="formTable">
-            <p:dataTable value="#{userBean.users}"
-                         var="us" 
-                         id="users"
-                         rowKey="#{us.userId}"
-                         selection="#{userBean.selectedUser}" 
-                         selectionMode="single">
+            <p:dataTable id="users" var="us" value="#{userBean.users}">
 
                 <f:facet name="header">
                     User's Table
                 </f:facet>
-                <p:column>
-                    <f:facet name="header">Name</f:facet>
+                <p:column headerText="First Name">
                     <h:outputText value="#{us.firstName}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">Last Name</f:facet>
+                <p:column headerText="Last Name">
                     <h:outputText value="#{us.lastName}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">User</f:facet>
+                <p:column headerText="User Name">
                     <h:outputText value="#{us.userName}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">Password</f:facet>
+                <p:column headerText="Password">
                     <h:outputText value="#{us.userPassword}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">Options</f:facet>
-                    <p:commandButton   value="Edit" update=":formTable:formEditDialog" oncomplete="PF('dialEdit').show()">
-                        <f:setPropertyActionListener  value="#{us}" target="#{userBean.selectedUser}" />
-                    </p:commandButton>
-                    
-                    <p:commandButton value="Delete"  action="#{userBean.deleteUser(us)}" process="@this" update="users"/>
+                    <p:commandButton id="btnDeleteTable" value="Delete"  action="#{userBean.deleteUser(us)}" immediate="true" update="users"  rendered="true" process="@form"/>
+                    <p:commandButton  id="btnEdit" actionListener="#{userBean.loadUser(us)}" oncomplete="PF('editDial').show();" value="Edit" update="idOutPanel"/>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Add" oncomplete="PF('dial').show();">
-                        <p:ajax event="dialogReturn" update="users"/>
-                    </p:commandButton>
+                    <p:commandButton id="btnAddTable" value="Add" oncomplete="PF('dial').show();"  rendered="true"  process="@form"/>
                 </f:facet>
             </p:dataTable>
+
+            <p:dialog modal="true" id="editDialog" widgetVar="editDial" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="idOutPanel" style="text-align:center;">
+                    <p:panelGrid id="editPanel" columns="2" columnClasses="label,value">
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{userBean.selectedUser.firstName}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
 
             <p:dialog modal="true" id="formDialog" widgetVar="dial" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="addOutPanel" style="text-align:center;">
                     <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value">
 
                         <p:outputLabel value="Name"/>
-                        <p:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="*Insert your name"/>
+                        <p:inputText id="firstname" value="#{userBean.firstName}" />
 
                         <p:outputLabel value="Last Name"/>
-                        <p:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="*Insert your last name"/>
+                        <p:inputText id="lastname" value="#{userBean.lastName}" />
 
                         <p:outputLabel value="UserName"/>
-                        <p:inputText id="username" value="#{userBean.userName}" required="true" requiredMessage="*Insert your user name"/>
+                        <p:inputText id="username" value="#{userBean.userName}" />
 
                         <p:outputLabel value="Password"/>
-                        <p:password id="passOne" value="#{userBean.password1}" required="true" requiredMessage="Mandatory"/>
+                        <p:password id="passOne" value="#{userBean.password1}" />
 
                         <p:outputLabel value="Confirm Password"/>
-                        <p:password id="passTwo" value="#{userBean.password2}" required="true" requiredMessage="Mandatory"/>
+                        <p:password id="passTwo" value="#{userBean.password2}" />
 
-                        <p:commandButton oncomplete="PF('dial').hide();" value="Save"  actionListener="#{userBean.addNewUser()}" update="users"/>
-
-                    </p:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-
-            <p:dialog modal="true" id="formEditDialog" widgetVar="dialEdit" showEffect="fade" hideEffect="fade" resizable="false">
-                <p:outputPanel id="addOutPanel" style="text-align:center;">
-                    <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value" rendered="#{not empty userBean.selectedUser}">
-
-                        <p:outputLabel value="Name"/>
-                        <p:inputText id="firstname" value="#{userBean.selectedUser.firstName}" required="true" requiredMessage="*Insert your name"/>
-
-                        <p:outputLabel value="Last Name"/>
-                        <p:inputText id="lastname" value="#{userBean.selectedUser.lastName}" required="true" requiredMessage="*Insert your last name"/>
-
-                        <p:outputLabel value="UserName"/>
-                        <p:inputText id="username" value="#{userBean.selectedUser.userName}" required="true" requiredMessage="*Insert your user name"/>
-
-                        <p:outputLabel value="Password"/>
-                        <p:password id="passOne" value="#{userBean.selectedUser.userPassword}" required="true" requiredMessage="Mandatory"/>
-
-                        <p:commandButton oncomplete="PF('dialEdit').hide();" value="Save"  actionListener="#{userBean.updateUser()}" update="users"/>
+                        <p:commandButton id="btnSaveDialog" oncomplete="PF('dial').hide();" value="Save"  actionListener="#{userBean.addNewUser()}" update="users" />
 
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>
-
 
         </h:form>
-
     </h:body>
 </html>
 

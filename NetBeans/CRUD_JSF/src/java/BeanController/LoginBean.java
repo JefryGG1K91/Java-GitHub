@@ -6,6 +6,7 @@
 package BeanController;
 import Service.login.LoginInterfaceLocal;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +19,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "loginBean")
 @SessionScoped
-public class LoginBean {
+public class LoginBean implements Serializable{
 
     @EJB
     private LoginInterfaceLocal interfaceDao;
@@ -37,8 +38,8 @@ public class LoginBean {
             try {
                 
                  fc.getExternalContext().redirect("MainPage.xhtml");
-                 
-            } catch (IOException e) {
+                
+            } catch (Exception e) {
                 
                 e.getCause();
                 
@@ -81,4 +82,4 @@ public class LoginBean {
         this.pass = pass;
     }
 
-}
+ }

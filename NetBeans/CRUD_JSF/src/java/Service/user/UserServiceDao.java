@@ -7,7 +7,6 @@ package Service.user;
 
 import Model.Users;
 import java.util.List;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,40 +20,35 @@ public class UserServiceDao implements UserInterfaceDao {
 
     @PersistenceContext(unitName = "CRUD_JSFPU")
     EntityManager em;
-    
-  //  private EntityTransaction et;
-  //  private final static String PERSISTENCE_UNIT = "CRUD_JSFPU";
-  //  public UserServiceDao() { em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager(); }
-    
+
+    //  private EntityTransaction et;
+    //  private final static String PERSISTENCE_UNIT = "CRUD_JSFPU";
+    //  public UserServiceDao() { em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager(); }
     @Override
     public boolean addUser(Users usr) {
-        if (usr != null) {
+        if (usr == null || (usr.getFirstName().equals("") || usr.getLastName().equals("") || usr.getUserId().equals("") || usr.getUserName().equals("") || usr.getUserPassword().equals(""))) {
+
+            return false;
+            
+        } else {
 
 //            et = em.getTransaction();
-
 //            et.begin();
-
             em.persist(usr);
 
 //            et.commit();
-
             return true;
 
-        } else {
-
-            return false;
         }
     }
 
     @Override
     public boolean updateUser(Users usr) {
+        boolean result= false;
+        
         if (usr != null) {
 
             Users tempUser = em.find(Users.class, usr.getUserId());
-
-//            et = em.getTransaction();
-
-//            et.begin();
 
             tempUser.setFirstName(usr.getFirstName());
 
@@ -67,20 +61,22 @@ public class UserServiceDao implements UserInterfaceDao {
             try {
 
                 em.merge(tempUser);
-
-//                et.commit();
+                
+                result = true;
 
             } catch (Exception e) {
 
-//                em.setRollbackOnly();
-
+                System.out.println("Service.user.UserServiceDao.updateUser() "+e.getMessage());   
+                
             }
-            return true;
+            
 
         } else {
 
-            return false;
+            result = false;
         }
+        
+        return result;
     }
 
     @Override

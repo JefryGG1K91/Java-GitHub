@@ -24,3 +24,12 @@ hs_err_pid*
  
 xperiment/xperiment.model/src/main/resources/application.properties
 /bin/
+/NetBeans/CRUD_JSF/nbproject/private/
+/NetBeans/CRUD_JSF/build/
+/NetBeans/CRUD_JSF/dist/
+/NetBeans/JSF_ExampleCRUD/nbproject/private/
+/NetBeans/JSF_ExampleCRUD/dist/
+/NetBeans/JSF_ExampleCRUD/build/
+/NetBeans/TableExample/nbproject/private/
+/NetBeans/TableExample/build/
+/NetBeans/TableExample/dist/

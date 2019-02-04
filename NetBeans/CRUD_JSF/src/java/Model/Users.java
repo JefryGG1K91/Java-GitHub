@@ -35,10 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByUserName", query = "SELECT u FROM Users u WHERE u.userName = :userName")
     , @NamedQuery(name = "Users.findByUserPassword", query = "SELECT u FROM Users u WHERE u.userPassword = :userPassword")})
-@NamedNativeQueries({
-    @NamedNativeQuery(name = "Users.veryfyLogin",query = "SELECT * FROM users where users.user_name=?1 and users.user_password=?2",resultClass = Users.class)
-
-})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;

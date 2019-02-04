@@ -7,21 +7,22 @@ package BeanController;
 
 import Model.Users;
 import Service.user.UserInterfaceLocal;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import org.primefaces.context.RequestContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author jgutierrez
  */
 @ManagedBean(name = "userBean")
-@RequestScoped
-public class UserBean {
+@SessionScoped
+public class UserBean implements Serializable {
 
     @EJB
     private UserInterfaceLocal userInterfaceLocal;
@@ -36,11 +37,8 @@ public class UserBean {
 //<!--https://www.primefaces.org/showcase/ui/data/datatable/selection.xhtml-->
     @PostConstruct
     public void init() {
-
         this.users = userInterfaceLocal.getAllUsers();
-        this.selectedUser=new Users();
-        this.firstName ="binding example";
-        
+        selectedUser = new Users();
     }
 
     public void addNewUser() {
@@ -64,27 +62,26 @@ public class UserBean {
     public void updateUser() {
        
     }
+    
+    public void loadUser(Users us){
+    
+        this.selectedUser.setUserId(us.getUserId());
+        this.selectedUser.setUserName(us.getUserName());
+        this.selectedUser.setUserPassword(us.getUserPassword());
+        this.selectedUser.setFirstName(us.getFirstName());
+        this.selectedUser.setLastName(us.getLastName());
+        
+    }
 
     public void deleteUser(Users us) {
 
          if (userInterfaceLocal.deleteUser(us.getUserId())) {
             
-          RequestContext.getCurrentInstance().showMessageInDialog(
-                  new FacesMessage(FacesMessage.SEVERITY_INFO, "User notification", "User has been deleted"));
+          FacesMessage fm = new FacesMessage("Notification", "User "+ us.getUserName()+" has been deleted.");
+             FacesContext.getCurrentInstance().addMessage(null, fm);
             
         }
          
-    }
-
-    public void loadUser(Users us){
-    
-        this.id=us.getUserId();
-        this.firstName=us.getFirstName();
-        this.lastName=us.getLastName();
-        this.userName=us.getUserName();
-        this.password1=us.getUserPassword();
-        this.password2=us.getUserPassword();
-              
     }
     
     public int getId() {
