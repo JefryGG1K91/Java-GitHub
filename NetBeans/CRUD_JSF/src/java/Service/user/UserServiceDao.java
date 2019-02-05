@@ -26,17 +26,22 @@ public class UserServiceDao implements UserInterfaceDao {
     //  public UserServiceDao() { em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager(); }
     @Override
     public boolean addUser(Users usr) {
-        if (usr == null || (usr.getFirstName().equals("") || usr.getLastName().equals("") || usr.getUserId().equals("") || usr.getUserName().equals("") || usr.getUserPassword().equals(""))) {
+        if (usr == null || (usr.getFirstName().equals("") || usr.getLastName().equals("")  || usr.getUserName().equals("") || usr.getUserPassword().equals(""))) {
 
             return false;
             
         } else {
 
-//            et = em.getTransaction();
-//            et.begin();
-            em.persist(usr);
+            try {
+                
+                em.persist(usr);
+                
+            } catch (Exception e) {
+                
+                System.err.print(e);
+                
+            }
 
-//            et.commit();
             return true;
 
         }

@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <h:form id="formTable">
-            <p:dataTable id="users" var="us" value="#{userBean.users}">
+            <p:dataTable id="users" var="us" value="#{userBean.users}" rowKey="#{us.userId}">
 
                 <f:facet name="header">
                     User's Table
@@ -26,45 +26,32 @@
                 <p:column headerText="Password">
                     <h:outputText value="#{us.userPassword}" />
                 </p:column>
-                <p:column>
-                    <f:facet name="header">Options</f:facet>
-                    <p:commandButton id="btnDeleteTable" value="Delete"  action="#{userBean.deleteUser(us)}" immediate="true" update="users"  rendered="true" process="@form"/>
-                    <p:commandButton  id="btnEdit" actionListener="#{userBean.loadUser(us)}" oncomplete="PF('editDial').show();" value="Edit" update="idOutPanel"/>
+                <p:column headerText="Options">
+                    <p:commandButton id="btnDeleteTable" value="Delete"  action="#{userBean.deleteUser(us)}" update=":formTable:users"/>
+                    <p:commandButton id="editBtn" title="View" value="Edit" action="#{userBean.loadUser(us)}" oncomplete="PF('dial').show();" update=":formTable:addOutPanel"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton id="btnAddTable" value="Add" oncomplete="PF('dial').show();"  rendered="true"  process="@form"/>
                 </f:facet>
             </p:dataTable>
-
-            <p:dialog modal="true" id="editDialog" widgetVar="editDial" showEffect="fade" hideEffect="fade" resizable="false">
-                <p:outputPanel id="idOutPanel" style="text-align:center;">
-                    <p:panelGrid id="editPanel" columns="2" columnClasses="label,value">
-                        <h:outputText value="Id:" />
-                        <h:outputText value="#{userBean.selectedUser.firstName}" />
-                    </p:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-
+                
             <p:dialog modal="true" id="formDialog" widgetVar="dial" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="addOutPanel" style="text-align:center;">
                     <p:panelGrid  id="addPanel" columns="2" columnClasses="label,value">
-
+                        
                         <p:outputLabel value="Name"/>
-                        <p:inputText id="firstname" value="#{userBean.firstName}" />
+                        <p:inputText id="firstname" value="#{userBean.firstName}"/>
 
                         <p:outputLabel value="Last Name"/>
-                        <p:inputText id="lastname" value="#{userBean.lastName}" />
+                        <p:inputText id="lastname" value="#{userBean.lastName}"/>
 
-                        <p:outputLabel value="UserName"/>
-                        <p:inputText id="username" value="#{userBean.userName}" />
-
+                        <p:outputLabel value="User Name"/>
+                        <p:inputText id="username" value="#{userBean.userName}"/>
+                        
                         <p:outputLabel value="Password"/>
-                        <p:password id="passOne" value="#{userBean.password1}" />
+                        <p:password id="passOne" value="#{userBean.password1}" redisplay="true"/>
 
-                        <p:outputLabel value="Confirm Password"/>
-                        <p:password id="passTwo" value="#{userBean.password2}" />
-
-                        <p:commandButton id="btnSaveDialog" oncomplete="PF('dial').hide();" value="Save"  actionListener="#{userBean.addNewUser()}" update="users" />
+                        <p:commandButton id="btnSaveDialog" oncomplete="PF('dial').hide();" value="Save"  action="#{userBean.save()}" update="users"/>
 
                     </p:panelGrid>
                 </p:outputPanel>

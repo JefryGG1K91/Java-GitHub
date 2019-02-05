@@ -7,8 +7,11 @@ package BeanController;
 
 import Model.Users;
 import Service.user.UserInterfaceLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -26,64 +29,78 @@ public class UserBean implements Serializable {
 
     @EJB
     private UserInterfaceLocal userInterfaceLocal;
-    private int id;
+    private static int id;
     private String firstName;
     private String lastName;
     private String userName;
     private String password1;
-    private String password2;
     private List<Users> users;
     private Users selectedUser;
-//<!--https://www.primefaces.org/showcase/ui/data/datatable/selection.xhtml-->
+
     @PostConstruct
     public void init() {
         this.users = userInterfaceLocal.getAllUsers();
         selectedUser = new Users();
     }
 
-    public void addNewUser() {
+    public void save() {
 
-        Users userTemp = new Users();
+        if (getId() == 0) {
 
-        userTemp.setFirstName(firstName);
+            Users userTemp = new Users();
 
-        userTemp.setLastName(lastName);
+            userTemp.setFirstName(firstName);
 
-        userTemp.setUserName(userName);
+            userTemp.setLastName(lastName);
 
-        userTemp.setUserPassword(password1);
+            userTemp.setUserName(userName);
 
-        if (userInterfaceLocal.addUser(userTemp)) {
+            userTemp.setUserPassword(password1);
 
-          clearValues();
+            if (userInterfaceLocal.addUser(userTemp)) {
+
+                clearValues();
+            }
+
+        } else {
+
+            if (userInterfaceLocal.updateUser(new Users(id, firstName, lastName, userName, password1))) {
+
+                clearValues();
+            }
+
         }
     }
 
-    public void updateUser() {
-       
-    }
-    
-    public void loadUser(Users us){
-    
-        this.selectedUser.setUserId(us.getUserId());
-        this.selectedUser.setUserName(us.getUserName());
-        this.selectedUser.setUserPassword(us.getUserPassword());
-        this.selectedUser.setFirstName(us.getFirstName());
-        this.selectedUser.setLastName(us.getLastName());
-        
+    public void loadUser(Users us) {
+        //this.selectedUser = us;
+        setId(us.getUserId());
+        setFirstName(us.getFirstName());
+        setLastName(us.getLastName());
+        setUserName(us.getUserName());
+        setPassword1(us.getUserPassword());
+
     }
 
     public void deleteUser(Users us) {
 
-         if (userInterfaceLocal.deleteUser(us.getUserId())) {
-            
-          FacesMessage fm = new FacesMessage("Notification", "User "+ us.getUserName()+" has been deleted.");
-             FacesContext.getCurrentInstance().addMessage(null, fm);
-            
+        if (userInterfaceLocal.deleteUser(us.getUserId())) {
+
+            FacesMessage fm = new FacesMessage("Notification", "User " + us.getUserName() + " has been deleted.");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+
         }
-         
+
     }
-    
+
+    public void clearValues() {
+        this.firstName = "";
+        this.lastName = "";
+        this.userName = "";
+        this.password1 = "";
+        id = 0;
+    }
+
     public int getId() {
         return id;
     }
@@ -130,22 +147,6 @@ public class UserBean implements Serializable {
 
     public void setPassword1(String password) {
         this.password1 = password;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password) {
-        this.password2 = password;
-    }
-
-    public void clearValues() {
-            firstName = "";
-            lastName = "";
-            userName = "";
-            password1 = "";
-            password2 = "";
     }
 
     /**

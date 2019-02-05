@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,7 +39,7 @@ public class Users implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id", nullable = false, unique = true)
     private Integer userId;
     @Basic(optional = false)
     @NotNull
@@ -148,7 +146,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Users[ userId=" + userId + " ]";
+        return "Model.Users[ userId=" + userId + firstName +  lastName +  userName + userPassword + " ]";
     }
     
 }
