@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
+import { Employee } from './model/Employee';
 
 
 @Injectable({
@@ -9,16 +10,16 @@ import { Observable, Observer } from 'rxjs';
 
 export class EmployeeService {
 
-  private baseUrl: 'http://localhost:8080/rest/api/employees';
+  private baseUrl = 'http://localhost:8080/rest/api/employee';
 
   constructor(private http: HttpClient) { }
 
-  getEmployeeList(): Observable<any>  {
-    return this.http.get(`${this.baseUrl}`);
+  getEmployeeList(): Observable<Employee[]>  {
+    return this.http.get<Employee[]>(`${this.baseUrl}`);
   }
 
 // tslint:disable-next-line: ban-types
-  getEmployeeById(id: number): Observable<Object> {
+  getEmployeeById(id: string): Observable<Object> {
       return this.http.get(`${this.baseUrl}/${id}`);
   }
 
@@ -27,12 +28,12 @@ export class EmployeeService {
     return this.http.post(`${this.baseUrl}`, employee);
   }
 
-  deleteEmployee(id: number): Observable<any> {
+  deleteEmployee(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, {responseType : 'text'});
 }
 
 // tslint:disable-next-line: ban-types
-  updateEmployee(id: number, value: any): Observable<Object> {
+  updateEmployee(id: string, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${id}`, value);
   }
 

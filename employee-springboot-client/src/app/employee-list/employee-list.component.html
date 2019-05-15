@@ -1,3 +1,26 @@
-<p>
-  employee-list works!
-</p>
+<div class="container-fluid">
+  <div class="panel-heading">
+    <h1>Employees</h1>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Full Name</th>
+        <th>Position</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees | async">
+        <th scope="row">{{employee.empNo}}</th>
+        <td>{{employee.empName}}</td>
+        <td>{{employee.position}}</td>
+        <td rowspan="2">
+          <button (click)="searchEmployee(employee.empNo)">Edit</button>
+          <button (click)="deleteEmployee(employee.empNo)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
