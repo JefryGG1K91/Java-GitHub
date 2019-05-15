@@ -16,11 +16,15 @@
         <th scope="row">{{employee.empNo}}</th>
         <td>{{employee.empName}}</td>
         <td>{{employee.position}}</td>
-        <td rowspan="2">
-          <button (click)="searchEmployee(employee.empNo)">Edit</button>
-          <button (click)="deleteEmployee(employee.empNo)">Delete</button>
+        <td>
+          <button  (click)="empSelected == employee" style="margin: 2px" >Edit</button>
+          <button (click)="deleteEmployee(employee.empNo)" style="margin: 2px">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="empSelected != null">
+    <app-employee-details [employee]="empSelected"></app-employee-details>
 </div>

@@ -19,8 +19,8 @@ export class EmployeeService {
   }
 
 // tslint:disable-next-line: ban-types
-  getEmployeeById(id: string): Observable<Object> {
-      return this.http.get(`${this.baseUrl}/${id}`);
+  getEmployeeById(id: string): Observable<Employee> {
+      return this.http.get<Employee>(`${this.baseUrl}/${id}`);
   }
 
 // tslint:disable-next-line: ban-types
@@ -37,5 +37,6 @@ export class EmployeeService {
     return this.http.put(`${this.baseUrl}/${id}`, value);
   }
 
+  
 
   }

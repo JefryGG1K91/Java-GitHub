@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../model/Employee';
+import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -34,5 +36,4 @@ export class EmployeeListComponent implements OnInit {
           },
            error => console.log(error));
   }
-
 }
