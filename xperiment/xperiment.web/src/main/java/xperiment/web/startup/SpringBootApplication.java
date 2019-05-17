@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EntityScan({"xperiment"})
 public class SpringBootApplication extends SpringBootServletInitializer{
 
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SpringBootApplication.class);
