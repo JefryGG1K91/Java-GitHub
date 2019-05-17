@@ -1,0 +1,24 @@
+<h3>Create Employee</h3>
+
+<div class="container-fluid" [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="empNoTxt">Code</label>
+      <input type="text" class="form-control" id="empNoTxt" placeholder="Code" required [(ngModel)]="employee.empNo" name="empNo">
+    </div>
+    <div class="form-group">
+      <label for="empNameTxt">Employee Name</label>
+      <input type="text" class="form-control" id="empNameTxt" placeholder="Employee Name" required [(ngModel)]="employee.empName" name="empName">
+    </div>
+    <div class="form-group">
+      <label for="positionTxt">Position</label>
+      <input type="text" class="form-control" id="positionTxt" placeholder="Position" required [(ngModel)]="employee.position" name="position">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+</div>
+
