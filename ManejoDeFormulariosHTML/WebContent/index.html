@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+
+    <head>   
+
+        <meta charset="UTF-8">
+
+        <title>Ejercicio Formulario</title> 
+
+        <link rel="stylesheet" type="text/css" href="recursos/estilos.css"> 
+
+        <script type="text/javascript" src="recursos/funciones.js"></script> 
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+
+    <body>
+        <form name="form1" class="/ManejoDeFormulariosHTML/ManejadorForm" action="/ManejoDeFormulariosHTML/ManejadorForm" method="post" onsubmit="return validarForma(this);">
+
+            <table>
+                <caption>
+                    Formulario de registro de datos
+                </caption>   
+
+                <tr>
+
+                    <td  class="oce-first">Nombre (*)</td>
+                    <td><input name="nombreInput" class="default" type="text" onfocus="this.select();"></td>
+
+                </tr>
+                <tr>
+
+                    <td class="oce-first">Password (*)</td>
+                    <td><input name="passwordInput" class="default" type="password" onfocus="this.select();"></td>
+
+                </tr>
+                <tr>
+
+                    <td class="oce-first">Sexo (*)</td>
+                    <td>Masculino<input name="genero"  type="radio" value="M" ></td>
+                    &nbsp;&nbsp;&nbsp;
+                    <td>Femenino<input name="genero"  type="radio" value="F" ></td>
+
+                </tr>
+                <tr>
+
+                    <td class="oce-first">Lenguaje de programacion de interes (*)</td>
+                    <td>
+                        Java<input id="programacionCheck"  type="checkbox" name="tecnologia" value="java">
+                        &nbsp;&nbsp;&nbsp;
+                        C#<input id="programacionCheck"  type="checkbox" name="tecnologia" value="C#">
+                        &nbsp;&nbsp;&nbsp;
+                        Php<input id="programacionCheck"  type="checkbox" name="tecnologia" value="Php">
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td class="oce-first">Ocupacion (*)</td>
+                    <td>
+                        <select name="ocupacion" onfocus="this.select();">
+                            <option value="0">Ingeniero Sistema</option>
+                            <option value="1">Tecnologo Software</option>
+                            <option value="2">Licenciado Computacion</option>
+                            <option value="3">Otro</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td class="oce-first">Genero musical (*)</td>
+                    <td>
+                        <select name="musicaSelec"  multiple class="">
+                            <option value="Merengue">Merengue</option>
+                            <option value="Bachata">Bachata</option>
+                            <option value="Salsa">Salsa</option>
+                            <option value="Dembow">Dembow</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="oce-first"> Comentarios: </td>
+                    <td> 
+                        <textarea name="comentarios" cols="30" rows="2" class="default" onfocus="this.select();">
+                        Escribir un texto
+                        </textarea> 
+                    </td> 
+                </tr>
+                <tr style="text-align:center;">
+                    <td> <input type="reset" value="Limpiar" class="default"> </td> 
+                    <td> <input type="submit" value="Enviar" class="default"> </td>
+                </tr> 
+
+            </table> 
+        </form>
+    </body>
+</html>

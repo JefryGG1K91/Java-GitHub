@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<bean id="student_bean" class="com.jefrygutierrez.Student"
+		scope="prototype" init-method="initStudent"
+		destroy-method="destroyStudent">
+		<property name="studentName" value="Jefry Gutierrez"></property>
+	</bean>
+
+	<context:annotation-config />
+
+	<bean id="Address_bean"
+		class="com.jefrygutierrez.dependencyInjection.Address"
+		scope="prototype">
+		<property name="address" value="las palmas de herrera"></property>
+	</bean>
+
+	<bean id="personal_information"
+		class="com.jefrygutierrez.dependencyInjection.PersonalInformation"
+		scope="prototype">
+		<!-- <constructor-arg ref="Address_bean"></constructor-arg> -->
+	</bean>
+
+
+</beans>
