@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@ComponentScan({"com.stockhandler"})
 //@EntityScan({"com.stockhandler"})
 public class StockHandlerApplication {
+	
 	public static void main(String[] args) {
 		SpringApplication.run(StockHandlerApplication.class, args);
 	}

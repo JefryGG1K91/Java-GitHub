@@ -17,8 +17,7 @@ public class RolServiceImplementation implements RolService {
 	
 	@Override
 	public List<RolEntity> getAllRol() {
-		System.out.println("getAllRol()");
-		return rolRepository.findAll();
+		return rolRepository.getAllRol();
 	}
 
 }
