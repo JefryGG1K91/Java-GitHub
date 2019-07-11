@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form prependId="false">
+            <h:commandButton value="Start" type="button" onclick="start()"/>
+            <h:inputTextarea id="txtArea" style="width: 600px;height: 800px"/>    
+        </h:form>
+
+        <script type="text/javascript">
+            var webSocket = new WebSocket('ws://127.0.0.1:8080/WebSocketApp/client');
+//endpoint
+            webSocket.onerror = function (event) {
+                onError(event);
+            };
+
+            webSocket.onopen = function (event) {
+                onOpen(event);
+            };
+
+            webSocket.onmessage = function (event) {
+                onMessage(event);
+            };
+
+            function onError(event) {
+                alert(event.data);
+            }
+
+            function onOpen(event) {
+                console.log("onOpen"+event);
+                document.getElementById('txtArea').value = event.data.value;
+            }
+
+            function onMessage(event) {
+                console.log("onMessage"+event);
+                document.getElementById('txtArea').value += event.data;
+            }
+            
+            function start(){
+                webSocket.send('hello');
+            }
+
+        </script>
+
+    </h:body>
+</html>
+
+<!--
+document.location.href
+http://127.0.0.1:8080/WebSocketApp/
+-->

@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 13, 2019, 10:27:34 AM
+    Author     : jgutierrez
+*/
+
+.compositionHeader{
+    background-color: #333;
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.compositionFooter{
+    /* padding: 15px !important;
+     border: 10px !important;
+     position: absolute;
+     height: 60px;
+    */
+    background-color: #333;
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.loginForm{
+    margin: 300px 750px 0px 750px;
+    background: border-box;
+}
+
+.indexLayout{
+    background-color: black !important;
+}
+
+p{
+    color: white;
+}

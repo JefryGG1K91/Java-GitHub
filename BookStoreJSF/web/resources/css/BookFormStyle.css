@@ -1,0 +1,37 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 18, 2019, 10:19:07 AM
+    Author     : jgutierrez
+*/
+
+.layout{
+    min-width: 400px;
+    min-height: 925px;
+    margin-top: 55px;
+}
+.buttonStyle{
+    width: 158px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    
+}
+.buttonIconCart{
+ background-image: url('../img/iconcart.png');
+}
+.qtyColumn{
+    width: 90px;
+}
+.cartTable{
+   width: auto; 
+   white-space: nowrap; 
+}
+.actionColumnStyle{
+    width: 90px;
+ }
+ input{
+     width: 60px;
+ }

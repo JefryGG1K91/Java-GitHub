@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head id="headId">
+        <title>Scope Annotations</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputScript library="js" name="main.js"/>
+    </h:head>
+    <h:body>
+        <div class="mainContent" id="idMainContent">
+            <h:form id="idForm">
+                <p:panelGrid id="panelForm" columns="2" columnClasses="label,value">
+                    <f:facet name="header">
+                        Annotation's Scopes
+                    </f:facet>
+                    <p:outputLabel value="Application"/>
+                    <p:inputText value="#{applicationBean.values.counter}"/>
+                    <p:outputLabel value="Session"/>
+                    <p:inputText value="#{applicationBean.sb.values.counter}" />
+                    <p:outputLabel value="Request"/>
+                    <p:inputText value="#{applicationBean.rb.values.counter}"/>
+                    <p:outputLabel value="Conversation"/>
+                    <p:inputText value="#{applicationBean.cb.values.counter}"/>
+                    <f:facet name="footer">
+                        <p:panelGrid columns="4">
+                            <p:commandLink id="oneLink" styleClass="fontLink" value="++" action="#{applicationBean.increment()}"  process="@all" update="panelForm"/>
+                            <p:commandLink id="twoId" styleClass="fontLink" value="LogOff Session Request" action="#{sessionBean.destroySession()}" process="@all" update="panelForm"/>
+                            <p:commandLink id="threeId" styleClass="fontLink" value="Begin Conversational Scope" action="#{conversationalBean.startConversation()}" process="@all" update="panelForm"/>
+                            <p:commandLink id="fourId" styleClass="fontLink" value="Close Conversational Scope" action="#{conversationalBean.endConversation()}" process="@all" update="panelForm"/>
+                        </p:panelGrid>
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

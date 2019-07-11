@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div  id="LoginFormId" class="loginForm">
+                <h:form id="formJSF">
+                    <p:panel id="panel" header="Login">
+
+                        <p:messages id="mgs"/>
+                        <h:panelGrid columns="3">
+
+                            <p:outputLabel for="user" value="User" styleClass="ui-panelgrid-cell"/>
+
+                            <p:inputText id="user" required="true" label="User" styleClass="ui-panelgrid-cell" value="#{loginBean.userName}">
+                                <f:validateLength minimum="2" maximum="50"/>   
+                                <p:ajax update="msUser" event="keyup" />
+                                <f:event type="preValidate" listener="#{loggingEventHandlers.beforeValidation}"/>
+                                <f:event type="postValidate" listener="#{loggingEventHandlers.afterValidation}"/>
+                            </p:inputText>
+                            <p:message for="user" display="icon" id="msUser"/>
+
+                            <p:outputLabel for="passTxt" value="Password" styleClass="ui-panelgrid-cell"/>
+
+                            <p:password id="passTxt" required="true" label="User" styleClass="ui-panelgrid-cell" value="#{loginBean.password}">
+                                <f:validateLength minimum="2" />
+                                <p:ajax update="msgPass" event="keyup" />
+                                <f:event type="preValidate" listener="#{loggingEventHandlers.beforeValidation}"/>
+                                <f:event type="postValidate" listener="#{loggingEventHandlers.afterValidation}"/>
+                            </p:password>
+                            <p:message for="passTxt" id="msgPass" display="icon"/>
+
+                            <p:outputLabel />
+                            <p:commandLink value="Sign up" action="#{loginBean.verifyLogin()}" actionListener="#{loggingEventHandlers.actionPerformed}"/>
+                        </h:panelGrid>
+
+                    </p:panel>
+                </h:form>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+
