@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,7 +27,7 @@ public class User implements UserDetails {
 	private Integer id;
 	
 	@NotNull(message = "User Name cannot be null")
-	@Column(name="username")
+	@Column(name="username", unique = true)
 	private String username;
 	
 	@NotNull(message = "Password cannot be null")

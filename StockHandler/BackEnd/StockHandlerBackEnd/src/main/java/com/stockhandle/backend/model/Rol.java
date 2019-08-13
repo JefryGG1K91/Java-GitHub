@@ -28,7 +28,7 @@ public class Rol implements Serializable{
 	private Integer id;
 	
 	@NotNull(message = "Description cannot be null")
-	@Column(name="description")
+	@Column(name="description", unique=true)
 	private String description;
 	
 	@Column(name="rol_status")
