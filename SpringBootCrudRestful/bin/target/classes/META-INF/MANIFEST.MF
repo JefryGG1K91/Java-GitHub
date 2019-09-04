@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: SpringBootCrudRestful
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: jgutierrez
+Built-By: jefrygutierrez
 Implementation-Vendor-Id: com.example
-Build-Jdk: 1.8.0_121
+Build-Jdk: 1.8.0_181
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/SpringBootCrudRestful
 Created-By: Maven Integration for Eclipse
