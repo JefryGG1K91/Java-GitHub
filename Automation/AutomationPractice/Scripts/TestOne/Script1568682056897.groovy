@@ -15,10 +15,10 @@ import internal.GlobalVariable as GlobalVariable
 
 WebUI.openBrowser('')
 
-//Sample path. Change it to your saved location of autoIT script
-autoit_prj = 'C:\\Users\\JefryGutierrez\\Desktop\\AIProxyAth.exe'
-Runtime.getRuntime().exec(autoit_prj)
-Thread.sleep(3000);
-
 //Sample URL. Please change it to your authentication URL
 WebUI.navigateToUrl('http://the-internet.herokuapp.com/basic_auth')
+
+//Sample path. Change it to your saved location of autoIT script
+autoit_prj = 'D:\\Git\\Java-GitHub\\Automation\\AutomationPractice\\Drivers\\AIProxyAth.exe \"pedro\" \"martinez\"'
+Runtime.getRuntime().exec(autoit_prj)
+Thread.sleep(3000);
