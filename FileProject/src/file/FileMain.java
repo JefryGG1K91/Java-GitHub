@@ -15,15 +15,15 @@ public class FileMain {
     public static void main(String[] args) throws IOException {
 
 //        FileController fc = new FileController();
-//        List<FileEntity> result = fc.fileListFromFolder("C:\\Users\\jgutierrez\\Documents\\logs\\");
-//        
+//        List<FileEntity> result = fc.fileListFromFolder("C:\\JefryGutierrez-LogConfigReader");
+        
 //        for (int i = 0; i < result.size(); i++) {
 //            ObservableFileLines observableFileLines = new ObservableFileLines(0);
 //            ObserverFileLines observerFileLines = new ObserverFileLines();
 //            observableFileLines.addObserver(observerFileLines);
 //            observableFileLines.setFileLines(fc.countFileLines(result.get(i).getAbsolutePath()));
 //        }
-                File file = new File("C:\\Users\\jgutierrez\\Documents\\logs\\");
+                File file = new File("C:\\JefryGutierrez-LogConfigReader");
 		System.out.println(file.getName() + " : " + getFileFolderSize(file));
 
     }
