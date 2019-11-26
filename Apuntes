@@ -1,0 +1,158 @@
+jgutierrez
+jgutierrez224*
+-----------------------
+jenkins:
+admin
+440afe692b15421a8a10045ce7c49835
+-----------------------------------
+weblogic
+weblogic1
+7001
+/home/jefrygutierrez/Oracle/Middleware/Oracle_Home/user_projects/domains/base_domain/bin
+http://jefrygutierrez:7001/console/console.portal?_nfpb=true&_pageLabel=AppDeploymentsControlPage&AppDeploymentsControlPortlethandle=com.bea.console.handles.JMXHandle%28%22com.bea%3AName%3Dbase_domain%2CType%3DDomain%22%29
+----------------------
+ssh
+jenkinsKey
+12345
+"C:\Users\JefryGutierrez\.ssh\jenkinsKey"
+"C:\Users\JefryGutierrez\.ssh\jenkinsKey.pub"
+-------------------------------------------
+
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA+oeneTZv3CUShY/TL4nSC05HC/N8PQjfHET+GVVcnf5JQs3m8AJefXtl0X4uFZtEcIeL6/Ta9tgZ36POOBOMSHog1oIRAfvIc2FmS7TnT8LWcIKET5wSOW7lLyEAYVTE2XYOW3EE7GAwGoSXb7TUix440rAZmmzV6nCTt6uSd6439pnDvqLsSWkSdY5PC9T00mW3bC1dlw2+HHKl03jxxP8ZeXpHZVL44mGm9EcD93Tf6zwwdOeNAxw9+5Mkz6oXVHR6oRwWNISveLbh7ixfStgGdBOG9mHWA00rERBaLz8KIAcg0p2XdgEGTSN0ApU7vzltQeMBniFnjh+z0tpuzQ== jefrygutierrez
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGqSI8jJTeCMLO6yvPYHgNyvxmMw+Lbd8JuMiJnA3MvvTCfqABJJloOCz/JntR3vN3SGQznn43Zf1N4ZgcXUD9GG0S0hladblwrGBzBJ/+oTcE88wYWPk8L5lsgp49MDs+rwmgfFjU8NRqKdscX7CRLWTTN4VXbnhifzv36JgYL/h4tb6AJF+Mx7XRrUQJcFYXwqP6QIk6iVM1gITFB3cEBm99MPhBdZb6WkRf8pUiaEICqd3ccHP1oCIcoYYfrSeNGhmzR7gqsoDykb1cspQVJJjgZxJZnK4jaBcsRpa+rTvt8PwkOkexZwXRb4eDk3M/m4COdO4dVlY9WNd2ov// jefrygutierrez@DESKTOP-GMUQID0
+
+
+--------------------
+pasar archivos por ssh
+cmd > pscp.exe rutaArchivo usuario@ip:/destino
+
+----------------------------
+comando deploy
+
+~/Oracle/Middleware/Oracle_Home/wlserver/server/lib$ java -cp weblogic.jar weblogic.Deployer -verbose -noexit -adminurl 127.0.0.1:7001 -username weblogic -password weblogic1 -name SampleWebApp -source /home/jefr
+ygutierrez/Desktop/wars/SampleWebApp.war -stage -upload -deploy -timeout 300
+
+
+-------------------------------------------------
+1-conectar al servidor por ssh
+2-crear pipeline
+	hacer checkout del repo.
+	usar comando pscp.exe para enviar el archivo desde jenkins hasta servidor
+	llamar el comando para hacer deploy (validar si se remplaza el actual)
+-------------------------------------------------
+root / root  centosServer
+jenkins / 12345 centosServer
+root/1234 mysql
+admin/1234 jenkins page
+----------------------------------
+DOCKERS
+----------------------------------
+docker images (retorna todos las imagens creadas)
+docker info | grep -i root (directorio docket)
+docker logs -f IMAGE (IMPRIMR EL LOG EN PANTALLA)
+docker-compose (stop/start) image (INICIA IMAGEN)
+docker exec -ti IMAGEN bash (ejecuta la consola desde la image, ya que el sistema opetativo no contiene aplicaciones.)
+docker images -f “dangling=true” -q : elimina las imagenes que estan mal instaladas
+docker rmi -f (elimina imagen)
+docker-compose up -d (sube la imagen container on base)
+-----------------
+#1 ADMIN JENKINS DOCKERS
+CREDENTIALS: 42c4803ec7b646d68ba55cc675575935
+#2 ADMIN 12345
+---------------------------
+LINUX
+---------------------------
+#!/bin/bash (comando inicial para escribir un script, debe ir en la primera linea)
+chmod +x (ruta/archivo) (para obtener permiso de ejecucion sobre un archivo en linux)
+docker cp (archivo) (imagen:ruta/archivo) (para mover archivos)
+comando: cat imprime el script
+generar llave para usuario remoto ssh:  ssh-keygen -f remote-key
+ruta para cambiar el DNS (C:\Windows\System32\drivers\etc)
+sudo systemctl enable docker (incia desde que inicia la sesion)
+sudo systemctl start docker (inicia servicio)
+sudo docker run hello-world (corre la prueba)
+sudo du -sh /var/lib/docker
+usermod -a -G GRUPO USUARIO (AGREGA USUARIO A GRUPO)
+sudo usermod -aG docker jenkins (da permiso al usuario al grupo)
+ssh -i remote-key user@domain (accede a traves de ssh con la llave creada, esto no requiere contrasena)
+----------------------------------------------
+crear slave docker
+----------------------------------------------
+FROM centos
+
+RUN yum -y install openssh-server
+
+RUN useradd remote_user && \
+    echo "1234" | passwd remote_user --stdin && \
+    mkdir  /home/remote_user/.ssh \
+    chmod 700 /home/remote_user/.ssh
+
+COPY remote-key.pub /home/remote_user/.ssh/authorized_keys                                                                                                                                                                                                                                                                                      RUN chown remote_user:remote_user -R /home/remote_user/.ssh/ && \                                                                                                           chown 600 /home/remote_user/.ssh/authorized_keys                                                                                                                                                                                                                                                                                            RUN /usr/sbin/sshd-keygen                                                                                                                                               
+CMD /usr/sbin/ssh -D 
+
+////////////////////////
+
+FROM centos
+RUN yum -y install openssh-server
+RUN useradd remote_user && \
+    echo remote_user:1234 | chpasswd && \
+    mkdir /home/remote_user/.ssh && \
+    chmod 700 /home/remote_user/.ssh
+COPY remote-key.pub /home/remote_user/.ssh/authorized_keys
+RUN chown remote_user:remote_user -R /home/remote_user/.ssh && \
+    chmod 600 /home/remote_user/.ssh/authorized_keys
+RUN /usr/bin/ssh-keygen -A
+CMD /usr/sbin/sshd -D
+---------------------------------------------
+docker-compose
+--------------------------------------------
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - $PWD/jenkins_home:/var/jenkins_home
+    networks:
+      - net
+  remote_host:
+    container_name: remote-host
+    image: remote-host
+    build:
+      context: centos7
+    networks:
+      - net
+networks:
+  net:
+-----------------------------------------
+	-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAw0ponA8OS1tF5r3fq5jEqv2ZPFHVP5iYq5eFHAF2YulVMLUG
+/jpanWUdnUWR+UeTVT7Fr8lmLE74riBdZbI6ieS9qTq/uSdvWRba+L5vwv+hZDo0
+GYfCQXrdimFskjUx6SB7PN53DWUKtCZdQFR0lWA8PcWcEruxAcTgzQpKtLU+I6On
+hJKZNX1DFO+VbA2ppz8jTeVIO8Tg8+F4MRqxAcLWgy0LCqRlOAFB+SLN8unq9uKx
+oSAHiqJucVOlhTxdq9faJbUixa1hA7DMeP3Sn4J+RiFxic1x+kFSEYuFlnqN/CQR
+6YzcjNVF5JZKRG+rMmlHKdlvScG99CC/dEj0yQIDAQABAoIBACB1pK+TvQ9/az3v
+/1ZZPQ8iua6R93zrkyyqMaC3CYNlPxiqbjAhaOBSZzq1zo59fBqmJVuTgR0KP0FJ
+9dwqZJp436FaN3XB/Tr0lo7TsGXb8WpkVjaMHxidIGeYy9/9YX9bO8ChRW5/hejt
+m4BOyVXuufSWfNuMQN6HZ8oM1N/2GZhgZ3fLDjJUIlCnr9JewAXeuAm7qe1U6s0L
+o6f3xDnnEXj3rvBC7cdfAegNm4ep6IloJ5lDgiVPVwrzMQmwSs5p9/y7i03rjfeu
+oIrEG5qzc0ei6XkSD/KoY40L2IJDuc7jVmaccT2a4YbUoaN/E36BKDmwvuBZS8ob
+GsC9cvUCgYEA7XGOn1uZhktPdDaFdGYJos5/SVPdBEaryl/9nNm5g6YDFESUWG/o
+KXEyHOL5rgyR2AS6vRyLfc9+nnr91KDINQAtGxuy0UASqGQ1EzxuJnpxmBKf9j3T
+uGLREelw+dBFmG07WWPXY7xXPv528H9f1OnNA18VLXMCaC77E2H+s1sCgYEA0o2D
+m/qRqxOsrThImtpiQgIqMnjaO/2V7JTp7VpCpPbl3n4F3RKYXpk4utXrX3bp9y72
+Fc83ysl225at5jX+4CcB2zNh5cHje+PVrnCyBc6Oa5e8BVgQ65vlVE+BkBKIn0s+
+zKQBeo1qqKRQpTrDYy8YneBRapaDo268OZmhJasCgYBtNo4jPj6fRoSFL46yuzwz
+Zkelsq02Ckt6CizcuEhcBT/lUqXpB5ABf89M+hldtOpgMcyyry5577aNroSSCGIN
+/sbAcT0OgioSygSflGwVxrv49pgc6tM3PDxtwLH2NZXNRnDF7OZlOXvnvaN3ex7Z
+D7D8m/9hqESzJujVQX2lgQKBgQCbNdSZy+lL2nIFMyNae7fI/v2KPUpqxLGbN98F
+p+7O2m5zSCUcZZPK0FpgaEddFTS9kXG4fAudwkuK7hV9Sbp8FGUq6EK3cuk1r6sa
+L1scKrsUF0N0EQpQFJjGQOG6id8KxhYiFpg8djj03kPQuXPFDrev0edSkmext3Sr
+ZVPEhwKBgQCcW5Xm1zH1Zl2FYxIlBhG9R+z/dsAAohCa6YciEOlvyz2VdHBdmyc4
+vL+WFklABQ4OlYMMpP2okk9JnnQKPKiEJbxmhdLJiqj0kC/E5sCZV3ugvj4TFuee
+jihCYbK7JskkSIpBg+v3CgKdOEDvMiMjLlTGUsu12SAggiLezbZPwQ==
+-----END RSA PRIVATE KEY-----
+-----------------------------------------------------------
