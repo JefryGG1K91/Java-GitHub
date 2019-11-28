@@ -32,8 +32,9 @@ comando deploy
 
 ~/Oracle/Middleware/Oracle_Home/wlserver/server/lib$ java -cp weblogic.jar weblogic.Deployer -verbose -noexit -adminurl 127.0.0.1:7001 -username weblogic -password weblogic1 -name SampleWebApp -source /home/jefr
 ygutierrez/Desktop/wars/SampleWebApp.war -stage -upload -deploy -timeout 300
-
-
+---
+~/Oracle/Middleware/Oracle_Home/wlserver/server/lib$ java -cp weblogic.jar weblogic.Deployer -verbose -noexit -adminurl 127.0.0.1:7001 -username weblogic -password weblogic1 -name SampleWebApp -source /home/jefr
+ygutierrez/Desktop/wars/SampleWebApp.war -stage -upload -deploy -timeout 300
 -------------------------------------------------
 1-conectar al servidor por ssh
 2-crear pipeline
@@ -56,6 +57,7 @@ docker exec -ti IMAGEN bash (ejecuta la consola desde la image, ya que el sistem
 docker images -f “dangling=true” -q : elimina las imagenes que estan mal instaladas
 docker rmi -f (elimina imagen)
 docker-compose up -d (sube la imagen container on base)
+docker cp (archivo) (imagen:ruta/archivo) (para mover archivos)
 -----------------
 #1 ADMIN JENKINS DOCKERS
 CREDENTIALS: 42c4803ec7b646d68ba55cc675575935
@@ -65,7 +67,6 @@ LINUX
 ---------------------------
 #!/bin/bash (comando inicial para escribir un script, debe ir en la primera linea)
 chmod +x (ruta/archivo) (para obtener permiso de ejecucion sobre un archivo en linux)
-docker cp (archivo) (imagen:ruta/archivo) (para mover archivos)
 comando: cat imprime el script
 generar llave para usuario remoto ssh:  ssh-keygen -f remote-key
 ruta para cambiar el DNS (C:\Windows\System32\drivers\etc)
@@ -156,3 +157,12 @@ vL+WFklABQ4OlYMMpP2okk9JnnQKPKiEJbxmhdLJiqj0kC/E5sCZV3ugvj4TFuee
 jihCYbK7JskkSIpBg+v3CgKdOEDvMiMjLlTGUsu12SAggiLezbZPwQ==
 -----END RSA PRIVATE KEY-----
 -----------------------------------------------------------
+146815
+jbE86HZuxO91i9XwPrRO
+visa 17JTOFNJSQB -612550
+$187.93  
+Cancel	Tuesday, November 26, 2019
+7:14:04 PM PST
+Approved 
+(Detailed Response. Credit Floor: Insufficient funds)
+5415470130942116 02-21
