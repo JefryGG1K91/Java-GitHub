@@ -85,25 +85,27 @@ FROM centos
 RUN yum -y install openssh-server
 
 RUN useradd remote_user && \
-    echo "1234" | passwd remote_user --stdin && \
-    mkdir  /home/remote_user/.ssh \
-    chmod 700 /home/remote_user/.ssh
-
-COPY remote-key.pub /home/remote_user/.ssh/authorized_keys                                                                                                                                                                                                                                                                                      RUN chown remote_user:remote_user -R /home/remote_user/.ssh/ && \                                                                                                           chown 600 /home/remote_user/.ssh/authorized_keys                                                                                                                                                                                                                                                                                            RUN /usr/sbin/sshd-keygen                                                                                                                                               
-CMD /usr/sbin/ssh -D 
-
-////////////////////////
-
-FROM centos
-RUN yum -y install openssh-server
-RUN useradd remote_user && \
     echo remote_user:1234 | chpasswd && \
     mkdir /home/remote_user/.ssh && \
     chmod 700 /home/remote_user/.ssh
+
 COPY remote-key.pub /home/remote_user/.ssh/authorized_keys
-RUN chown remote_user:remote_user -R /home/remote_user/.ssh && \
+
+RUN chown remote_user:remote_user   -R /home/remote_user && \
     chmod 600 /home/remote_user/.ssh/authorized_keys
+
 RUN /usr/bin/ssh-keygen -A
+
+RUN yum -y install mysql
+
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+
+RUN yum -y install python3
+
+RUN python3 get-pip.py
+
+RUN pip install awscli
+
 CMD /usr/sbin/sshd -D
 ---------------------------------------------
 docker-compose
