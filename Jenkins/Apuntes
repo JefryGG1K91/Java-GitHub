@@ -168,12 +168,7 @@ vL+WFklABQ4OlYMMpP2okk9JnnQKPKiEJbxmhdLJiqj0kC/E5sCZV3ugvj4TFuee
 jihCYbK7JskkSIpBg+v3CgKdOEDvMiMjLlTGUsu12SAggiLezbZPwQ==
 -----END RSA PRIVATE KEY-----
 -----------------------------------------------------------
-146815
-jbE86HZuxO91i9XwPrRO
-visa 17JTOFNJSQB -612550
-$187.93  
-Cancel	Tuesday, November 26, 2019
-7:14:04 PM PST
-Approved 
-(Detailed Response. Credit Floor: Insufficient funds)
-5415470130942116 02-21
+aws s3 cp /tmp/db.sql s3://jenkins-mysql-backup-jefry/db.sql
+
+export AWS_SECRET_ACCESS_KEY=4A/UdTYru3/JBnAzyxcpTiTfhU4aYrZ9vDu6F5A0
+export AWS_ACCESS_KEY_ID=AKIAYDG4P65K5MQNFWRI
