@@ -77,15 +77,26 @@ sudo du -sh /var/lib/docker
 usermod -a -G GRUPO USUARIO (AGREGA USUARIO A GRUPO)
 sudo usermod -aG docker jenkins (da permiso al usuario al grupo)
 ssh -i remote-key user@domain (accede a traves de ssh con la llave creada, esto no requiere contrasena)
+nl file.txt (imprime y muesta las lineas de un archivo)
+nl file | grep -w (n) (retorna la linea especificada)
+nl people.txt | grep -w 38 | awk '{print $2}' | awk -F ',' '{print $2}' (ese comando seleciona la linea 38, seleciona la columna 2, el comando
+awk -F ',' sirve para separar por un delimitador y luego se imprime la posicion del arreglo)
+shuf -i 20-25 (retorna numeros random)
 -----------------------------------------------
 MYSQL
 -----------------------------------------------
- mysqldump --column-statistics=0 -h db_host -u root -p testdb > /tmp/db.sql (hacer backup de base de datos mysql, por consola)
+mysql -u root -h db_host -p (conectar a servidor desde cliente)
+mysqldump --column-statistics=0 -h db_host -u root -p testdb > /tmp/db.sql (hacer backup de base de datos mysql, por consola)
 ----------------------------------------------
 AWS
 ---------------------------------------------
+# credenciales (jgenere91  --- gabrielaissa14@gmail.com --- Jg22400550889*)
 aws s3 cp (ruta/archivo) s3://(nombre del bucket)/(nombre archivo) (sube archivo al repo,)
 aws s3 cp s3://mybucket/test.txt test2.txt (descargar archivos)
+---------------------------------------------
+ANSIBLE
+---------------------------------------------
+ansible-playbook -h hostsFile playFile.yml (ejecuta archivo ansible desde la consola)
 ---------------------------------------------
 crear slave docker
 ----------------------------------------------
@@ -140,6 +151,23 @@ services:
 networks:
   net:
 -----------------------------------------
+DATABASE SCRIPT
+----------------------------------------
+#!/bin/bash
+
+counter=0
+
+while [ $counter -lt 50 ]; do
+  let counter=counter+1
+
+  name=$(nl people.txt | grep -w $counter | awk '{print $2}' | awk -F ',' '{print $1}');
+  lastname=$(nl people.txt | grep -w $counter | awk '{print $2}' | awk -F ',' '{print $2}');
+  age=$(shuf -i 20-50 -n 1)
+  mysql -u root -p1234 people -e "insert into register values ($counter, '$name', '$lastname', $age)"
+  echo "id $counter  **name: $name **lastname: $lastname **age: $age , imported correctly"
+
+done
+--------------------------------------------
 	-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEAw0ponA8OS1tF5r3fq5jEqv2ZPFHVP5iYq5eFHAF2YulVMLUG
 /jpanWUdnUWR+UeTVT7Fr8lmLE74riBdZbI6ieS9qTq/uSdvWRba+L5vwv+hZDo0
