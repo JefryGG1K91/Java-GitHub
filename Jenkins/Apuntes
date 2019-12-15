@@ -82,6 +82,10 @@ nl file | grep -w (n) (retorna la linea especificada)
 nl people.txt | grep -w 38 | awk '{print $2}' | awk -F ',' '{print $2}' (ese comando seleciona la linea 38, seleciona la columna 2, el comando
 awk -F ',' sirve para separar por un delimitador y luego se imprime la posicion del arreglo)
 shuf -i 20-25 (retorna numeros random)
+------
+ERROR - "System is booting up. Unprivileged users are not permitted to log in yet. Please come back later. For technical details, see pam_nologin(8)."
+FIX - ve al remote host y elimina nologin comando 1 : ls -l /run/nologin comando 2 : rm /run/nologin
+------
 -----------------------------------------------
 MYSQL
 -----------------------------------------------
