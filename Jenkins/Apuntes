@@ -45,7 +45,11 @@ ygutierrez/Desktop/wars/SampleWebApp.war -stage -upload -deploy -timeout 300
 root / root  centosServer
 jenkins / 12345 centosServer
 root/1234 mysql
-admin/1234 jenkins page
+admin/1234 http://jenkins.local:8080/
+root/12345678 http://gitlab.example.com:8090/
+IAM User Name,Smtp Username,Smtp Password
+"jenkins-test-mail",AKIAYDG4P65KX4K7NPKJ,BMZvKmdIyJMQKvskuj9kN67KKHLafKuejGU0a5O2GbFL
+jgenere91/gabrielaissa14@gmail.com/Jg22400550889* aws.com
 ----------------------------------
 DOCKERS
 ----------------------------------
@@ -139,6 +143,8 @@ services:
   jenkins:
     container_name: jenkins
     image: jenkins/jenkins
+    build:
+      context: jenkins-ansible
     ports:
       - "8080:8080"
     volumes:
@@ -150,6 +156,38 @@ services:
     image: remote-host
     build:
       context: centos7
+    volumes:
+      - $PWD/aws-s3.sh:/tmp/script.sh
+    networks:
+      - net
+  db_host:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      - "MYSQL_ROOT_PASSWORD=1234"
+    volumes:
+      - $PWD/db_data:/var/lib/mysql
+    networks:
+      - net
+  web:
+    container_name: web
+    image: ansible-web
+    build:
+      context: jenkins-ansible/web
+    ports:
+      - "80:80"
+    networks:
+      - net
+  git:
+    container_name: gitlab
+    image: 'gitlab/gitlab-ce:latest'
+    hostname: 'gitlab.example.com'
+    ports:
+      - '8090:8090'
+    volumes:
+      - '/srv/gitlab/config:/etc/gitlab'
+      - '/srv/gitlab/logs:/var/log/gitlab'
+      - '/srv/gitlab/data:/var/opt/gitlab'
     networks:
       - net
 networks:
@@ -204,3 +242,10 @@ aws s3 cp /tmp/db.sql s3://jenkins-mysql-backup-jefry/db.sql
 
 export AWS_SECRET_ACCESS_KEY=4A/UdTYru3/JBnAzyxcpTiTfhU4aYrZ9vDu6F5A0
 export AWS_ACCESS_KEY_ID=AKIAYDG4P65K5MQNFWRI
+------------------------------------------------------------
+TRIGGER JOB FROM SCRIPT
+------------------------------------------------------------
+crumb=$(curl -u "usuario:clave" -s 'http://jenkins.local:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+SIN PARAMETROS: curl -u "usuario:clave" -H "$crumb" -X POST (URL DE LA TAREA) http://jenkins.local:8080/job/EnviromentVariable/build?delay=0sec 
+CON PARAMETROS: curl -u "usuario:clave" -H "$crumb" -X POST (URL DE LA TAREA) http://jenkins.local:8080/job/backup-to-aws/buildWithParameters?MYSQL_HOST=db_host&DATABASE_NAME=testdb&AWS_BUCKET_NAME=jenkins-mysql-backup
+----------------------------------------------------------
