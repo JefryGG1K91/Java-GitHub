@@ -62,6 +62,7 @@ docker images -f “dangling=true” -q : elimina las imagenes que estan mal ins
 docker rmi -f (elimina imagen)
 docker-compose up -d (sube la imagen container on base)
 docker cp (archivo) (imagen:ruta/archivo) (para mover archivos)
+docker run -ti -v $PWD/java-app:/app -w /app maven:3-alpine sh (mover archivos a contenedor (rutaOrigen:destino -w ruta(inicia en la ruta especificada) contenedor:version sh))
 -----------------
 #1 ADMIN JENKINS DOCKERS
 CREDENTIALS: 42c4803ec7b646d68ba55cc675575935
@@ -249,3 +250,7 @@ crumb=$(curl -u "usuario:clave" -s 'http://jenkins.local:8080/crumbIssuer/api/xm
 SIN PARAMETROS: curl -u "usuario:clave" -H "$crumb" -X POST (URL DE LA TAREA) http://jenkins.local:8080/job/EnviromentVariable/build?delay=0sec 
 CON PARAMETROS: curl -u "usuario:clave" -H "$crumb" -X POST (URL DE LA TAREA) http://jenkins.local:8080/job/backup-to-aws/buildWithParameters?MYSQL_HOST=db_host&DATABASE_NAME=testdb&AWS_BUCKET_NAME=jenkins-mysql-backup
 ----------------------------------------------------------
+/var/jenkins_home/ansible/play.yml
+/var/jenkins_home/ansible/hosts
+
+git clone http://gitlab.example.com/jenkins_git/dsl-jobs.git
