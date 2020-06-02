@@ -17,7 +17,9 @@ jenkinsKey
 "C:\Users\JefryGutierrez\.ssh\jenkinsKey"
 "C:\Users\JefryGutierrez\.ssh\jenkinsKey.pub"
 -------------------------------------------
-
+productionUser:12345
+root:root
+------------------------------------------
 ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA+oeneTZv3CUShY/TL4nSC05HC/N8PQjfHET+GVVcnf5JQs3m8AJefXtl0X4uFZtEcIeL6/Ta9tgZ36POOBOMSHog1oIRAfvIc2FmS7TnT8LWcIKET5wSOW7lLyEAYVTE2XYOW3EE7GAwGoSXb7TUix440rAZmmzV6nCTt6uSd6439pnDvqLsSWkSdY5PC9T00mW3bC1dlw2+HHKl03jxxP8ZeXpHZVL44mGm9EcD93Tf6zwwdOeNAxw9+5Mkz6oXVHR6oRwWNISveLbh7ixfStgGdBOG9mHWA00rERBaLz8KIAcg0p2XdgEGTSN0ApU7vzltQeMBniFnjh+z0tpuzQ== jefrygutierrez
 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGqSI8jJTeCMLO6yvPYHgNyvxmMw+Lbd8JuMiJnA3MvvTCfqABJJloOCz/JntR3vN3SGQznn43Zf1N4ZgcXUD9GG0S0hladblwrGBzBJ/+oTcE88wYWPk8L5lsgp49MDs+rwmgfFjU8NRqKdscX7CRLWTTN4VXbnhifzv36JgYL/h4tb6AJF+Mx7XRrUQJcFYXwqP6QIk6iVM1gITFB3cEBm99MPhBdZb6WkRf8pUiaEICqd3ccHP1oCIcoYYfrSeNGhmzR7gqsoDykb1cspQVJJjgZxJZnK4jaBcsRpa+rTvt8PwkOkexZwXRb4eDk3M/m4COdO4dVlY9WNd2ov// jefrygutierrez@DESKTOP-GMUQID0
@@ -25,7 +27,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGqSI8jJTeCMLO6yvPYHgNyvxmMw+Lbd8JuMiJnA3M
 
 --------------------
 pasar archivos por ssh
-cmd > pscp.exe rutaArchivo usuario@ip:/destino
+cmd > name.exe rutaArchivo usuario@ip:/destino
 
 ----------------------------
 comando deploy
@@ -50,6 +52,8 @@ root/12345678 http://gitlab.example.com:8090/
 IAM User Name,Smtp Username,Smtp Password
 "jenkins-test-mail",AKIAYDG4P65KX4K7NPKJ,BMZvKmdIyJMQKvskuj9kN67KKHLafKuejGU0a5O2GbFL
 jgenere91/gabrielaissa14@gmail.com/Jg22400550889* aws.com
+productionUser:12345  productionServer
+root:root productionServer
 ----------------------------------
 DOCKERS
 ----------------------------------
@@ -62,7 +66,10 @@ docker images -f “dangling=true” -q : elimina las imagenes que estan mal ins
 docker rmi -f (elimina imagen)
 docker-compose up -d (sube la imagen container on base)
 docker cp (archivo) (imagen:ruta/archivo) (para mover archivos)
+docker build -f Dockerfile-java -t test . (prueba el docker file especifico)
 docker run -ti -v $PWD/java-app:/app -w /app maven:3-alpine sh (mover archivos a contenedor (rutaOrigen:destino -w ruta(inicia en la ruta especificada) contenedor:version sh))
+docker push jgutierrez91/maven-project:latest
+
 -----------------
 #1 ADMIN JENKINS DOCKERS
 CREDENTIALS: 42c4803ec7b646d68ba55cc675575935
@@ -70,6 +77,7 @@ CREDENTIALS: 42c4803ec7b646d68ba55cc675575935
 ---------------------------
 LINUX
 ---------------------------
+scp -i prod /tmp/.auth productionUser@production.server:/tmp/.auth
 #!/bin/bash (comando inicial para escribir un script, debe ir en la primera linea)
 chmod +x (ruta/archivo) (para obtener permiso de ejecucion sobre un archivo en linux)
 comando: cat imprime el script
@@ -254,3 +262,18 @@ CON PARAMETROS: curl -u "usuario:clave" -H "$crumb" -X POST (URL DE LA TAREA) ht
 /var/jenkins_home/ansible/hosts
 
 git clone http://gitlab.example.com/jenkins_git/dsl-jobs.git
+
+
+./jenkins/build/mvn.sh mvn -B -DskipTest clean package
+
+./jenkins/build/build.sh
+
+
+#!/bin/bash
+
+echo "**********************************"
+echo "** Buiilding jar *****************"
+echo "**********************************"
+docker run --rm -v $PWD/java-app:/app -v /root/.m2/:/root/.m2/ -w /app maven:3-alpine "$@"
+
+sudo chown 1000 -R /var/run/docker.sock
